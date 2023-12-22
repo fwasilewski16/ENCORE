@@ -9,7 +9,7 @@ import { accountWindowActions, modalActions } from "../store";
 import MobileMenu from "../UI/MobileMenu";
 import useScreenWidth from "../hooks/useScreenWidth";
 import NavbarNavlink from "../UI/NavbarNavlink";
-import LogInWindow from "../UI/LoginWindow";
+import LogInWindow from "../UI/LogInWindow";
 import LogOutWindow from "../UI/LogOutWindow";
 import AccountWindow from "../UI/AccountWindow";
 import SearchWindow from "../UI/SearchWindow";
