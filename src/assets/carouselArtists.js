@@ -1,0 +1,17 @@
+export const artists = [
+    { id: "taylor_swift", artistName: "Taylor Swift", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Ftaylor_swift.jpg?alt=media&token=e49fa756-ba10-4f0d-ab0c-8ed2bac674b2" },
+    { id: "justin_bieber", artistName: "Justin Bieber", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fjustin_bieber.jpg?alt=media&token=d8954c1e-054d-4bbe-990c-3c1e6537c1c7" },
+    { id: "ariana_grande", artistName: "Ariana Grande", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fariana_grande.jpg?alt=media&token=b4ed99a5-5363-433c-988e-41a91457c245" },
+    { id: "ed_sheeran", artistName: "Ed Sheeran", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fed_sheeran.jpg?alt=media&token=7c76e9e6-dca8-4f96-a443-b6f763f9a8ca" },
+    { id: "elton_john", artistName: "Elton John", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Felton_john.jpg?alt=media&token=85519693-1ae1-49b5-8b8c-0a3cfe817d06" },
+    { id: "new_order", artistName: "New Order", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fnew_order.jpg?alt=media&token=58d128d6-e617-422b-9c9c-86e738707cca" },
+    { id: "roger_waters", artistName: "Roger Waters", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Froger_waters.jpg?alt=media&token=a7e36f9b-001c-4854-82a9-62e6f5239931" },
+    { id: "louis_tomlinson", artistName: "Louis Tomlinson", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Flouis_tomlinson.jpg?alt=media&token=6a828f10-bb12-43da-89f0-6189c947ae3a" },
+    { id: "king_krule", artistName: "King Krule", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fking_krule.jpg?alt=media&token=8db88bf8-eef2-47a0-8e42-766193191338" },
+    { id: "gary_numan", artistName: "Gary Numan", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fgary_numan.jpg?alt=media&token=9db62a75-a242-4306-b119-c8b12cab5446" },
+    { id: "ellie_goulding", artistName: "Ellie Goulding", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fellie_goulding.jpg?alt=media&token=dc7769c7-eeb8-44c8-9357-e9187a93cd33" },
+    { id: "madonna", artistName: "MADONNA", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fmadonna.jpg?alt=media&token=4da08c64-4b1d-4d5f-b76e-82eb2a4fc4f5" },
+    { id: "blink_182", artistName: "BLINK-182", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fblink_182.jpg?alt=media&token=d867af4a-297d-4645-a597-d0bec90e885b" },
+    { id: "muse", artistName: "Muse", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fmuse.jpg?alt=media&token=5c703030-114d-4c80-a770-41d9ed054b38" },
+    { id: "pj_harvey", artistName: "PJ Harvey", img: "https://firebasestorage.googleapis.com/v0/b/encore-f883d.appspot.com/o/artists_images%2Fpj_harvey.jpg?alt=media&token=8455765b-fc0d-4c22-a41a-7d24870a636f" },
+];
