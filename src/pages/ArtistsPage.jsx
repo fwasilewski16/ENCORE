@@ -47,8 +47,8 @@ export default function ArtistsPage() {
         {isLoading
           ? loadingArray
           : artists.map((artist) => (
-              <div className="w-full xl:w-1/2">
-                <ArtistSingleComponent img={artist.img} name={artist.name} key={artist._id} artist_id={artist.artist_id} />
+              <div className="w-full xl:w-1/2" key={artist._id}>
+                <ArtistSingleComponent img={artist.img} name={artist.name} artist_id={artist.artist_id} />
               </div>
             ))}
       </div>
