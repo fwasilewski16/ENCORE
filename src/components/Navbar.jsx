@@ -13,7 +13,7 @@ import LogInWindow from "../UI/LogInWindow";
 import LogOutWindow from "../UI/LogOutWindow";
 import AccountWindow from "../UI/AccountWindow";
 import SearchWindow from "../UI/SearchWindow";
-import MyEventsWindow from "../UI/myEventsWindow";
+import MyEventsWindow from "../UI/MyEventsWindow";
 import MyArtistsWindow from "../UI/MyArtistsWindow";
 
 const liClass = "flex h-full items-center";
