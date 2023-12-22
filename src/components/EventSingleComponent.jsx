@@ -24,7 +24,7 @@ export default function EventSingleComponent(props) {
   }
 
   return (
-    <NavLink to={`/events/${props.event_id}`} onClick={onClick} className="flex min-h-[8rem] w-full justify-between border-b-2">
+    <NavLink to={`/ENCORE/events/${props.event_id}`} onClick={onClick} className="flex min-h-[8rem] w-full justify-between border-b-2">
       <div className="flex">
         <div className="m-auto h-24 w-24 min-w-[96px] rounded-lg bg-gray-300">
           <img

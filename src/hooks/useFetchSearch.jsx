@@ -9,7 +9,7 @@ export default function useFetchSearch(filter) {
     async function fetchData(filter) {
       setIsLoading(true);
       try {
-        const response = await fetch(`https://3.8.100.175:8080/encore/events/search?filter=${filter}`);
+        const response = await fetch(`http://3.8.100.175:8080/encore/events/search?filter=${filter}`);
         if (!response.ok) {
           throw new Error();
         }
