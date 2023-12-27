@@ -9,7 +9,7 @@ export default function useFetchArtists(filter) {
     async function fetchArtists(filter) {
       try {
         setIsLoading(true);
-        const response = await fetch(`https://3.8.100.175:443/encore/artists?filter=${filter}`);
+        const response = await fetch(`https://3.8.100.175:8080/encore/artists?filter=${filter}`);
         if (!response.ok) {
           throw new Error();
         }

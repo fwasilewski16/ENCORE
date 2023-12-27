@@ -11,7 +11,7 @@ export default function useFetchEvents() {
     async function fetchEvents(city, dateFrom, dateTo) {
       try {
         dispatch(eventsActions.isLoadingHandler(true));
-        const response = await fetch(`https://3.8.100.175:443/encore/events?city=${city}&dateFrom=${dateFrom}&dateTo=${dateTo}&artist_id=`);
+        const response = await fetch(`https://3.8.100.175:8080/encore/events?city=${city}&dateFrom=${dateFrom}&dateTo=${dateTo}&artist_id=`);
         if (!response.ok) {
           throw Error("Something went wrong");
         }

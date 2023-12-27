@@ -10,10 +10,10 @@ export default function useFetchSingleArtist(artist_id) {
     async function fetchArtist(artist_id) {
       try {
         setIsLoading(true);
-        const responseArtist = await fetch(`https://3.8.100.175:443/encore/artists/${artist_id}`);
+        const responseArtist = await fetch(`https://3.8.100.175:8080/encore/artists/${artist_id}`);
         const dataArtist = await responseArtist.json();
         setArtist(dataArtist);
-        const responseEvents = await fetch(`https://3.8.100.175:443/encore/events?artist_id=${artist_id}`);
+        const responseEvents = await fetch(`https://3.8.100.175:8080/encore/events?artist_id=${artist_id}`);
         const dataEvents = await responseEvents.json();
         setEvents(dataEvents);
         setIsLoading(false);

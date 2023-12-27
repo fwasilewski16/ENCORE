@@ -9,7 +9,7 @@ export default function useFetchStreams() {
     async function fetchStreams() {
       try {
         setIsLoading(true);
-        const response = await fetch("https://3.8.100.175:443/encore/streams");
+        const response = await fetch("https://3.8.100.175:8080/encore/streams");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
