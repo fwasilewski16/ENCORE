@@ -5,7 +5,7 @@ export default function useCountEvents(id) {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`http://3.8.100.175:8080/encore/events?city=All&dateFrom=&dateTo=&artist_id=${id}`);
+      const response = await fetch(`https://3.8.100.175:8080/encore/events?city=All&dateFrom=&dateTo=&artist_id=${id}`);
       const data = await response.json();
       setNumberOfConcerts(data.length);
     }
