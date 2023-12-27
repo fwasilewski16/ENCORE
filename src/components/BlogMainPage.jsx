@@ -30,8 +30,8 @@ export default function BlogMainPage() {
   }, []);
 
   return (
-    <div className="m-auto my-36 flex w-full min-w-[332px] max-w-[688px] flex-col items-center px-4 md:mx-auto md:px-0 xl:max-w-[60%]">
-      <h2 className="w-full pb-16 text-3xl lg:text-4xl">Visit our blog</h2>
+    <div className="m-auto my-16 flex w-full min-w-[332px] max-w-[688px] flex-col items-center px-4 md:mx-auto md:my-36 md:px-0 xl:max-w-[60%]">
+      <h2 className="w-full pb-8 text-xl md:pb-16 lg:text-4xl">Visit our blog</h2>
       <NavLink ref={blog1Ref} to="blog/behind_the_scenes" className={`group mb-8 flex flex-col gap-2 border-b-2 pb-8 transition duration-1000 ease-out xl:flex-row ${!blog1Visible && "translate-y-16 opacity-0"}`}>
         <div>
           <img src={blogs[1].image} width="1920" height="1080" className="lg:min-w-[30rem]" />
@@ -42,7 +42,7 @@ export default function BlogMainPage() {
           <p className="font-semibold group-hover:underline">Read more</p>
         </div>
       </NavLink>
-      <NavLink ref={blog2Ref} to="blog/concert_fashion" className={`group mb-8 flex flex-col gap-2 pb-8 transition duration-1000 ease-out xl:flex-row ${!blog2Visible && "translate-y-16 opacity-0"}`}>
+      <NavLink ref={blog2Ref} to="blog/concert_fashion" className={`group flex flex-col gap-2 pb-8 transition duration-1000 ease-out md:mb-8 xl:flex-row ${!blog2Visible && "translate-y-16 opacity-0"}`}>
         <div>
           <img src={blogs[2].image} width="1920" height="1080" className="lg:min-w-[30rem]" />
         </div>

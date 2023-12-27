@@ -9,25 +9,25 @@ export default function WelcomePage() {
   const [imageMove, setImageMove] = useState(false);
 
   return (
-    <div className="flex w-full min-w-[332px] flex-col-reverse items-center px-4 py-16 md:h-screen md:flex-row md:py-0 md:pt-20 lg:px-12">
+    <div className="flex w-full min-w-[332px] flex-col-reverse items-center px-4 pb-16 pt-16 md:h-screen md:flex-row md:py-0 md:pt-20 lg:px-12">
       <div className="flex max-w-[656px] flex-col justify-end gap-8 md:h-full md:w-1/2 md:max-w-none md:pb-8">
         <div className="overflow-hidden">
-          <h1 className={`text-4xl font-extrabold transition delay-700 duration-1000 ease-out md:max-w-[24rem] ${imageMove ? "md:translate-y-0" : "md:translate-y-full md:opacity-0"}`}>{textMain}</h1>
+          <h1 className={`text-3xl font-extrabold transition delay-700 duration-1000 ease-out md:max-w-[24rem] ${imageMove ? "translate-y-0" : "translate-y-full opacity-0"}`}>{textMain}</h1>
         </div>
         <h2 className="font-normal md:max-w-[24rem]">{text}</h2>
         <button className="h-11 w-36 bg-black text-white">
           <NavLink to="events">Browse events</NavLink>
         </button>
       </div>
-      <div className="overflow-hidden align-middle md:flex md:h-full md:w-1/2 md:justify-end">
+      <div className="justify-end overflow-hidden py-8 align-middle md:flex md:h-full md:w-1/2">
         <img
           src={imgSrc}
           width="656"
+          height="875"
           onLoad={() => {
             setImageMove(true);
           }}
-          height="875"
-          className={`object-cover py-8 transition delay-100 duration-700 ease-out md:h-full ${!imageMove && "md:translate-x-full md:opacity-0"}`}
+          className={`min-h-full object-cover transition delay-100 duration-700 ease-out md:h-full md:w-auto ${!imageMove && "opacity-0 md:translate-x-full"}`}
         />
       </div>
     </div>
