@@ -11,18 +11,18 @@ export default function useFetchSingleEvent(event_id) {
     async function fetchEvent(event_id) {
       try {
         setIsLoading(true);
-        const responseEvent = await fetch(`https://3.8.100.175:8080/encore/events/${event_id}`);
+        const responseEvent = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/events/${event_id}`);
         if (!responseEvent.ok) {
           throw new Error();
         }
         const event = await responseEvent.json();
         const venue = venues.find((venue) => venue.name === event.venue);
-        const responseBio = await fetch(`https://3.8.100.175:8080/encore/artists/${event.artist_id}`);
+        const responseBio = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/artists/${event.artist_id}`);
         if (!responseBio.ok) {
           throw new Error();
         }
         const artist = await responseBio.json();
-        const responseOtherEvents = await fetch(`https://3.8.100.175:8080/encore/events?city=All&dateFrom=&dateTo=&artist_id=${event.artist_id}`);
+        const responseOtherEvents = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/events?city=All&dateFrom=&dateTo=&artist_id=${event.artist_id}`);
         if (!responseOtherEvents.ok) {
           throw new Error();
         }
