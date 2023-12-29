@@ -22,7 +22,7 @@ export default function useFetchSingleEvent(event_id) {
           throw new Error();
         }
         const artist = await responseBio.json();
-        const responseOtherEvents = await fetch(`http://localhost:3000/encore/events?city=All&dateFrom=&dateTo=&artist_id=${event.artist_id}`);
+        const responseOtherEvents = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/events?city=All&dateFrom=&dateTo=&artist_id=${event.artist_id}`);
         if (!responseOtherEvents.ok) {
           throw new Error();
         }

@@ -9,7 +9,7 @@ export default function useFetchStreams() {
     async function fetchStreams() {
       try {
         setIsLoading(true);
-        const response = await fetch("http://localhost:3000/encore/streams");
+        const response = await fetch("https://portfolio-backend-409515.lm.r.appspot.com/encore/streams");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
