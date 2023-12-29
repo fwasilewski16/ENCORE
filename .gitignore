@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-hooks/
+components/hooks/
 
 # Editor directories and files
 .vscode/*
