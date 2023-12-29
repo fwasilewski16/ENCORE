@@ -10,10 +10,10 @@ export default function useFetchSingleArtist(artist_id) {
     async function fetchArtist(artist_id) {
       try {
         setIsLoading(true);
-        const responseArtist = await fetch(`http://localhost:3000/encore/artists/${artist_id}`);
+        const responseArtist = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/artists/${artist_id}`);
         const dataArtist = await responseArtist.json();
         setArtist(dataArtist);
-        const responseEvents = await fetch(`http://localhost:3000/encore/events?artist_id=${artist_id}`);
+        const responseEvents = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/events?artist_id=${artist_id}`);
         const dataEvents = await responseEvents.json();
         setEvents(dataEvents);
         setIsLoading(false);
