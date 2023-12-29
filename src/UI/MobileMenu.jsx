@@ -12,7 +12,7 @@ export default function MobileMenu() {
     <Modal function={"mobile"}>
       <div className="mx-auto flex flex-col items-center rounded-lg bg-white px-4">
         <NavLink
-          to="/events"
+          to="events"
           className="w-full border-b-2 py-6 text-center text-2xl"
           onClick={() => {
             dispatch(modalActions.toggleMobileWindow());
@@ -22,7 +22,7 @@ export default function MobileMenu() {
           Browse events
         </NavLink>
         <NavLink
-          to="/artists"
+          to="artists"
           className="w-full border-b-2 py-6 text-center text-2xl"
           onClick={() => {
             dispatch(modalActions.toggleMobileWindow());
@@ -32,7 +32,7 @@ export default function MobileMenu() {
           Artists
         </NavLink>
         <NavLink
-          to="/blog"
+          to="blog"
           className="w-full border-b-2 py-6 text-center text-2xl"
           onClick={() => {
             dispatch(modalActions.toggleMobileWindow());
@@ -42,7 +42,7 @@ export default function MobileMenu() {
           Blog
         </NavLink>
         <NavLink
-          to="/streams"
+          to="streams"
           className="w-full border-b-2 py-6 text-center text-2xl"
           onClick={() => {
             dispatch(modalActions.toggleMobileWindow());
