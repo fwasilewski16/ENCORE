@@ -105,20 +105,22 @@ export default function Navbar() {
             </button>
           </div>
           <div className="ml-4 flex h-full items-center md:hidden">
-            <img
-              src={menu_icon}
-              className="max-h-9"
-              onClick={() => {
-                dispatch(modalActions.toggleMobileWindow());
-                accountWindowVisible && dispatch(accountWindowActions.toggleAnimation());
-                setTimeout(() => {
-                  dispatch(modalActions.toggleAnimation());
-                }, 1);
-                setTimeout(() => {
-                  accountWindowVisible && dispatch(accountWindowActions.toggleAccountWindow());
-                }, 499);
-              }}
-            />
+            <button>
+              <img
+                src={menu_icon}
+                className="max-h-9"
+                onClick={() => {
+                  dispatch(modalActions.toggleMobileWindow());
+                  accountWindowVisible && dispatch(accountWindowActions.toggleAnimation());
+                  setTimeout(() => {
+                    dispatch(modalActions.toggleAnimation());
+                  }, 1);
+                  setTimeout(() => {
+                    accountWindowVisible && dispatch(accountWindowActions.toggleAccountWindow());
+                  }, 499);
+                }}
+              />
+            </button>
           </div>
         </li>
       </ul>
