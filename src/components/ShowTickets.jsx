@@ -12,15 +12,15 @@ function Prices(props) {
       </div>
       <div className="flex w-full justify-between">
         <div className="flex items-center">
-          <button disabled={props.counter === 0 && true} className="h-7 w-9 bg-gray-300 transition-all duration-75 hover:bg-gray-400" onClick={props.onClickMinus}>
+          <button disabled={props.counter === 0 && true} className="h-7 w-7 rounded-md bg-gray-300 transition-all duration-200 hover:bg-gray-400" onClick={props.onClickMinus}>
             <img src={remove} className="m-auto" />
           </button>
           <p className="h-7 w-8 bg-white text-center font-bold">{props.counter}</p>
-          <button className="h-7 w-9 bg-gray-300 transition-all duration-75 hover:bg-gray-400" onClick={props.onClickPlus}>
+          <button className="h-7 w-7 rounded-md bg-gray-300 transition-all duration-200 hover:bg-gray-400" onClick={props.onClickPlus}>
             <img src={add} className="m-auto" />
           </button>
         </div>
-        <button className={`h-7 px-2 text-white transition-all ${props.counter != 0 ? "bg-black" : "bg-gray-100"}`}>ADD TO BASKET</button>
+        <button className={`h-7 rounded-md px-2 text-white transition-all duration-200 ${props.counter != 0 ? "bg-black" : "bg-gray-100"}`}>BUY</button>
       </div>
     </div>
   );
@@ -37,7 +37,7 @@ export default function ShowTickets(props) {
   return (
     <div className="flex max-w-full flex-col">
       <button
-        className="mb-3 flex h-16 max-w-full items-center justify-between border-2 px-2 shadow-md"
+        className={`mb-3 flex h-16 max-w-full items-center justify-between rounded-lg border-2 px-4 transition duration-500 ${expand && "shadow-lg"}`}
         onClick={() => {
           setExpand((prevState) => !prevState);
           setGaCounter(0);

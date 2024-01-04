@@ -15,8 +15,15 @@ export default function WelcomePage() {
           <h1 className={`text-3xl font-extrabold transition delay-700 duration-1000 ease-out md:max-w-[24rem] ${imageMove ? "translate-y-0" : "translate-y-full opacity-0"}`}>{textMain}</h1>
         </div>
         <h2 className="font-normal md:max-w-[24rem]">{text}</h2>
-        <button className="h-11 w-36 bg-black text-white">
-          <NavLink to="events">Browse events</NavLink>
+        <button className="h-11 w-36 rounded-lg bg-black text-white">
+          <NavLink
+            to="events"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            Browse events
+          </NavLink>
         </button>
       </div>
       <div className="justify-end overflow-hidden py-8 align-middle md:flex md:h-full md:w-1/2">

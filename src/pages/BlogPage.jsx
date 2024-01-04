@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 
 function BlogSingle(props) {
   return (
-    <NavLink to={props.to} className="group flex border-b-2 pb-8 xl:flex-col-reverse xl:justify-end xl:border-b-0 xl:pb-0">
+    <NavLink to={props.to} className="group flex flex-col-reverse border-b-2 pb-8 md:flex-row xl:flex-col-reverse xl:justify-end xl:border-b-0 xl:pb-0">
       <div className="flex min-w-[70%] flex-col pr-2 xl:pr-0 ">
         <h3 className="text-lg font-semibold xl:min-h-[84px]">{props.title}</h3>
         <p className=" xl:min-h-[144px]">{props.description}</p>

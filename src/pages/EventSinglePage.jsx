@@ -23,8 +23,7 @@ export default function EventSinglePage() {
   const eventSaved = eventsList.map((event) => event.event_id).includes(event_id);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    setRevealData(false);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [event_id]);
 
   function scrollToTickets() {
@@ -90,7 +89,7 @@ export default function EventSinglePage() {
       </div>
       <div className="mx-4 mb-4 flex flex-col gap-4">
         <h2 className="text-2xl font-bold">Venue:</h2>
-        <div className={`flex flex-col gap-3 bg-gray-100 p-4 ${!revealData && "opacity-0"}`}>
+        <div className={`flex flex-col gap-3 rounded-md bg-gray-100 p-4 ${!revealData && "opacity-0"}`}>
           <p className="h-7 text-lg">
             <span className="font-semibold">{eventSingle.venue}</span> {eventSingle.city}
           </p>

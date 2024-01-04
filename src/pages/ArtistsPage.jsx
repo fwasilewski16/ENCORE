@@ -27,7 +27,7 @@ export default function ArtistsPage() {
   }, [filterInput]);
 
   return (
-    <div className="m-auto mt-16 w-full min-w-[332px] max-w-[688px] items-center px-4 md:mx-auto md:mt-20 md:px-0 xl:max-w-[60%]">
+    <div className="m-auto mt-16 min-h-screen w-full min-w-[332px] max-w-[688px] items-center px-4 md:mx-auto md:mt-20 md:px-0 xl:max-w-[60%]">
       <h2 className="py-6 text-4xl font-extrabold">Browse artists</h2>
       <div>
         <input className="mb-6 h-10 w-full rounded-full border-2 border-black pl-4 text-xl font-medium leading-10 placeholder:text-base placeholder:font-normal xl:w-[500px]" placeholder="SEARCH ARTISTS" onChange={filterHandler} value={filterInput} />

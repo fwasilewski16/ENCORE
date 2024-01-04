@@ -1,11 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useFetchEvents from "../hooks/useFetchEvents";
 import { eventsActions } from "../store";
 
-export default function EventFilter() {
+export default function EventFilter(props) {
   const dispatch = useDispatch();
 
   const [city, dateFrom, dateTo] = useFetchEvents();
+  const isLoading = useSelector((state) => state.events.isLoading);
 
   function CityButton(props) {
     return (
@@ -21,7 +22,7 @@ export default function EventFilter() {
   }
 
   return (
-    <div className="w-full">
+    <div className={`w-full transition duration-500 ${!props.animation && "opacity-0"}`}>
       <p>Filter by city:</p>
       <div className="flex flex-wrap gap-3 py-3">
         <CityButton city={"All"} />

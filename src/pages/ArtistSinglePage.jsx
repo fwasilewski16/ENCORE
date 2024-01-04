@@ -45,10 +45,10 @@ export default function ArtistsSinglePage() {
                   dispatch(accountActions.removeArtist(artist.artist_id));
                 }
               }}
-              className={`relative h-10 w-64 bg-black font-semibold text-white ${artistSaved ? "bg-green-500" : "bg-black"}`}
+              className={`relative h-10 w-64 rounded-lg bg-black font-semibold text-white transition ${artistSaved ? "bg-green-500" : "bg-black"}`}
             >
               {!loggedIn && (
-                <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-white bg-opacity-80 backdrop-blur-sm">
+                <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-lg bg-white bg-opacity-80 backdrop-blur-sm">
                   <p className="text-sm text-black">Log in to add to your list</p>
                 </div>
               )}

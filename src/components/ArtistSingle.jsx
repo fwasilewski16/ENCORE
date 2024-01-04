@@ -10,12 +10,18 @@ export default function ArtistSingle(props) {
   useEffect(() => {
     const observerStart = new IntersectionObserver((entries) => {
       const entry = entries[0].isIntersecting;
-      entry && props.changeDirection("right");
+      entry &&
+        setTimeout(() => {
+          props.changeDirection("right");
+        }, 2000);
     });
 
     const observerEnd = new IntersectionObserver((entries) => {
       const entry = entries[0].isIntersecting;
-      entry && props.changeDirection("left");
+      entry &&
+        setTimeout(() => {
+          props.changeDirection("left");
+        }, 2000);
     });
 
     props.start && observerStart.observe(navlink.current);

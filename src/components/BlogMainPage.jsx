@@ -34,26 +34,26 @@ export default function BlogMainPage() {
       <h2 className="w-full pb-8 text-xl md:pb-16 lg:text-4xl">Visit our blog</h2>
       <NavLink ref={blog1Ref} to="blog/behind_the_scenes" className={`group mb-8 flex flex-col gap-2 border-b-2 pb-8 transition duration-1000 ease-out xl:flex-row ${!blog1Visible && "translate-y-16 opacity-0"}`}>
         <div>
-          <img src={blogs[1].image} width="1920" height="1080" className="lg:min-w-[30rem]" />
+          <img src={blogs[1].image} width="1920" height="1080" className="rounded-lg lg:min-w-[30rem]" />
         </div>
         <div className="flex flex-col gap-2 lg:justify-end xl:gap-8 xl:pl-3">
           <h3 className="text-xl font-semibold">{blogs[1].title}</h3>
           <p className="">{blogs[1].description}</p>
-          <p className="font-semibold group-hover:underline">Read more</p>
+          <p className="font-semibold md:group-hover:underline">Read more</p>
         </div>
       </NavLink>
       <NavLink ref={blog2Ref} to="blog/concert_fashion" className={`group flex flex-col gap-2 pb-8 transition duration-1000 ease-out md:mb-8 xl:flex-row ${!blog2Visible && "translate-y-16 opacity-0"}`}>
         <div>
-          <img src={blogs[2].image} width="1920" height="1080" className="lg:min-w-[30rem]" />
+          <img src={blogs[2].image} width="1920" height="1080" className="rounded-lg lg:min-w-[30rem]" />
         </div>
         <div className="flex flex-col gap-2 lg:justify-end xl:gap-8 xl:pl-3">
           <h3 className="text-xl font-semibold">{blogs[2].title}</h3>
           <p className="">{blogs[2].description}</p>
-          <p className="font-semibold group-hover:underline">Read more</p>
+          <p className="font-semibold md:group-hover:underline">Read more</p>
         </div>
       </NavLink>
-      <button className="h-11 w-36 bg-black text-white">
-        <NavLink to="blog">VISIT OUR BLOG</NavLink>
+      <button className="h-11 w-36 rounded-lg bg-black text-white">
+        <NavLink to="blog">Visit our blog</NavLink>
       </button>
     </div>
   );

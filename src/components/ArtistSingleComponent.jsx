@@ -29,7 +29,7 @@ export default function ArtistSingleComponent(props) {
               setRevealData(true);
             }}
             loading="lazy"
-            className={`my-auto ${props.function === "artists" ? "rounded-lg" : "rounded-full"} object-cover transition ${!revealData && "opacity-0"}`}
+            className={`my-auto ${props.function === "artists" ? "rounded-lg" : "rounded-full"} object-cover transition duration-500 ${!revealData && "opacity-0"}`}
           />
         </div>
         <div className="flex flex-col justify-around py-3 pl-12 xl:justify-center xl:pl-4">
