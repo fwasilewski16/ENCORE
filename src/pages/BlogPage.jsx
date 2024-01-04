@@ -11,7 +11,7 @@ function BlogSingle(props) {
         <p className="font-semibold group-hover:underline">Read more</p>
       </div>
       <div className="min-w-[30%]">
-        <img src={props.image} width="1500" height="1000" className="h-full object-cover" />
+        <img src={props.image} width="1500" height="1000" className="h-full rounded-lg object-cover" />
       </div>
     </NavLink>
   );

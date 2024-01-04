@@ -40,7 +40,7 @@ export default function TopTenVenues(props) {
         onLoad={() => {
           setRevealData(true);
         }}
-        className={`mt-10 transition duration-700 ${!revealData && "opacity-0"}`}
+        className={`mt-10 rounded-lg transition duration-700 ${!revealData && "opacity-0"}`}
       />
       <div className="mb-20 flex flex-col gap-6">
         <h2 className="mt-10 text-4xl font-semibold ">Top 10 Must-See Concert Venues in the UK</h2>
