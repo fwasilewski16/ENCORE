@@ -9,7 +9,7 @@ export default function useFetchArtists(filter) {
     async function fetchArtists(filter) {
       try {
         setIsLoading(true);
-        const response = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/artists?filter=${filter}`);
+        const response = await fetch(`https://backend-portfolio-wasilewski.fly.dev/encore/artists?filter=${filter}`);
         if (!response.ok) {
           throw new Error();
         }

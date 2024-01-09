@@ -9,7 +9,7 @@ export default function useFetchSearch(filter) {
     async function fetchData(filter) {
       setIsLoading(true);
       try {
-        const response = await fetch(`https://portfolio-backend-409515.lm.r.appspot.com/encore/events/search?filter=${filter}`);
+        const response = await fetch(`https://backend-portfolio-wasilewski.fly.dev/encore/events/search?filter=${filter}`);
         if (!response.ok) {
           throw new Error();
         }
