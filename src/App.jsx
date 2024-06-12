@@ -12,17 +12,17 @@ import StreamsPage from "./pages/StreamsPage";
 
 const router = createBrowserRouter([
   {
-    path: "/ENCORE/",
+    path: "/",
     element: <Root />,
     children: [
-      { path: "/ENCORE/", element: <Homepage /> },
-      { path: "/ENCORE/events", element: <EventsPage /> },
-      { path: "/ENCORE/events/:event_id", element: <EventSinglePage /> },
-      { path: "/ENCORE/artists", element: <ArtistsPage /> },
-      { path: "/ENCORE/artists/:artist_id", element: <ArtistsSinglePage /> },
-      { path: "/ENCORE/blog", element: <BlogPage /> },
-      { path: "/ENCORE/blog/:blog_id", element: <BlogSinglePage /> },
-      { path: "/ENCORE/streams", element: <StreamsPage /> },
+      { path: "/", element: <Homepage /> },
+      { path: "/events", element: <EventsPage /> },
+      { path: "/events/:event_id", element: <EventSinglePage /> },
+      { path: "/artists", element: <ArtistsPage /> },
+      { path: "/artists/:artist_id", element: <ArtistsSinglePage /> },
+      { path: "/blog", element: <BlogPage /> },
+      { path: "/blog/:blog_id", element: <BlogSinglePage /> },
+      { path: "/streams", element: <StreamsPage /> },
     ],
   },
 ]);

@@ -34,7 +34,7 @@ export default function ArtistSingle(props) {
   });
 
   return (
-    <NavLink ref={navlink} to={`/ENCORE/artists/${props.id}`} className="mx-2 w-36 lg:w-48">
+    <NavLink ref={navlink} to={`/artists/${props.id}`} className="mx-2 w-36 lg:w-48">
       <img src={props.img} alt={props.id} width="600" height="600" className="rounded-xl" />
       <p className="font-inter font-semibold">{props.artistName}</p>
       <p className="font-inter font-light md:font-normal">{numberOfConcerts} upcoming events</p>

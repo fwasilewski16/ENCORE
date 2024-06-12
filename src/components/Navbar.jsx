@@ -37,7 +37,7 @@ export default function Navbar() {
       {eventsWindowVisible && <MyEventsWindow />}
       {artistsWindowVisible && <MyArtistsWindow />}
       <div className={`flex items-center transition duration-500 `}>
-        <NavLink to="/ENCORE/">
+        <NavLink to="/">
           <img src={logo_small} className="max-h-8" />
         </NavLink>
       </div>
