@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import useScroll from "../hooks/useScroll";
-import logo_small from "../assets/logos/logo_small_transparent.png";
+import logo_small from "../assets/logos/logo_small.webp";
 import search_icon from "../assets/icons/search.png";
 import user_icon from "../assets/icons/profile-user.png";
 import menu_icon from "../assets/icons/menu.png";
-import { useDispatch, useSelector } from "react-redux";
 import { accountWindowActions, modalActions } from "../store";
 import MobileMenu from "../UI/MobileMenu";
 import useScreenWidth from "../hooks/useScreenWidth";
@@ -49,7 +49,7 @@ export default function Navbar() {
         {!loggedIn && (
           <li className={liClass}>
             <button
-              className="hidden h-9 items-center rounded-full bg-black px-4 text-white md:m-4 md:flex xl:m-8"
+              className="hidden h-9 items-center rounded-full bg-black px-4 font-inter text-white md:m-4 md:flex xl:m-8"
               onClick={() => {
                 dispatch(modalActions.togglelogInWindow());
                 setTimeout(() => {

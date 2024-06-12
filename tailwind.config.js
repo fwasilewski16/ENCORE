@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: "Inter"
+      },
       screens: {
         'sm': '640px',
         // => @media (min-width: 640px) { ... }

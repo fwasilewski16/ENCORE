@@ -1,4 +1,4 @@
-export default function LivestreamHomepageLoadingSingle(props) {
+export default function LivestreamHomepageLoadingSingle() {
   return (
     <div className="flex h-24 min-h-[8rem] w-full justify-between border-b-2">
       <div className="flex flex-col justify-around py-3">

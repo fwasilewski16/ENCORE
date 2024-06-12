@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import ArtistReel from "../components/ArtistReel";
-import BlogMainPage from "../components/BlogMainPage";
-import LivestreamHomepage from "../components/LivestreamHomepage";
-import WelcomePage from "../components/WelcomePage";
+import HomepageWelcomePage from "../components/HomepageWelcomePage";
+import HomepageArtistReel from "../components/HomepageArtistReel";
+import HomepageBlog from "../components/HomepageBlog";
+import HomepageLivestream from "../components/HomepageLivestream";
 
 export default function Homepage() {
   useEffect(() => {
@@ -11,10 +11,10 @@ export default function Homepage() {
 
   return (
     <div className="min-w-[100px]">
-      <WelcomePage />
-      <ArtistReel />
-      <BlogMainPage />
-      <LivestreamHomepage />
+      <HomepageWelcomePage />
+      <HomepageArtistReel />
+      <HomepageBlog />
+      <HomepageLivestream />
     </div>
   );
 }

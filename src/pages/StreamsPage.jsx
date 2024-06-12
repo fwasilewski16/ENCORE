@@ -1,5 +1,5 @@
 import LivestreamHomepageLoadingSingle from "../components/LivestreamHomepageLoadingComponent";
-import LivestreamHomepageSingle from "../components/LivestreamHomepageSingle";
+import LivestreamSingle from "../components/LivestreamSingle";
 import useFetchStreams from "../hooks/useFetchStreams";
 
 export default function StreamsPage() {
@@ -13,7 +13,7 @@ export default function StreamsPage() {
         {isLoading && [<LivestreamHomepageLoadingSingle />, <LivestreamHomepageLoadingSingle />, <LivestreamHomepageLoadingSingle />]}
         <div className="">
           {streams.map((stream) => (
-            <LivestreamHomepageSingle image={stream.image} name={stream.name} date={stream.date} key={stream._id} />
+            <LivestreamSingle image={stream.image} name={stream.name} date={stream.date} key={stream._id} />
           ))}
         </div>
       </div>

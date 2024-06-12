@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import logo from "../assets/logos/logo_large_inverted.png";
+import logo from "../assets/logos/logo_large_black.webp";
 import twitter from "../assets/icons/twitter.png";
 import facebook from "../assets/icons/facebook.png";
 import instagram from "../assets/icons/instagram.png";
