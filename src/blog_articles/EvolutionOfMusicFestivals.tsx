@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-const blogs = [
+interface Blog {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const blogs: Blog[] = [
   {
     id: 1,
     title: "Woodstock: A Cultural Milestone (1969)",
@@ -38,23 +44,32 @@ const blogs = [
   },
 ];
 
-function BlogItem(props) {
+interface BlogItemProps {
+  title: string;
+  description: string;
+}
+
+function BlogItem({ title, description }: BlogItemProps) {
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-3xl font-semibold">{props.title}</h3>
-      <p className="font-semibold">{props.location}</p>
-      <p className="text-justify">{props.description}</p>
+      <h3 className="text-3xl font-semibold">{title}</h3>
+      <p className="text-justify">{description}</p>
     </div>
   );
 }
 
-export default function EvolutionOfMusicFestivals(props) {
-  const [revealData, setRevealData] = useState(false);
+interface EvolutionOfMusicFestivalsProps {
+  image: string;
+}
+
+export default function EvolutionOfMusicFestivals(props: EvolutionOfMusicFestivalsProps) {
+  const [revealData, setRevealData] = useState<boolean>(false);
 
   return (
     <div className="m-auto mt-16 w-full min-w-[332px] max-w-[688px] items-center px-4 md:mx-auto md:mt-20 md:px-0 xl:max-w-[60%]">
       <img
         src={props.image}
+        alt="Glastonbury sign with a crowd of people in front of it"
         width="1500"
         height="1000"
         onLoad={() => {
@@ -66,7 +81,7 @@ export default function EvolutionOfMusicFestivals(props) {
         <h2 className="mt-10 text-4xl font-semibold ">The Evolution of Music Festivals: From Woodstock to Glastonbury</h2>
         <p className="text-justify">Music festivals, with their kaleidoscope of sound, culture, and communal celebration, have undergone a remarkable evolution since their inception. From the iconic Woodstock in the 1960s to the globally renowned Glastonbury in the UK, let's journey through the history of music festivals, exploring their evolution and the unique elements that define some of the most prominent gatherings.</p>
         {blogs.map((blog) => (
-          <BlogItem key={blog.id} title={blog.title} location={blog.location} description={blog.description} />
+          <BlogItem key={blog.id} title={blog.title} description={blog.description} />
         ))}
         <p>In tracing the evolution of music festivals from Woodstock to Glastonbury and beyond, it becomes clear that these gatherings are not just about music—they are about cultural expression, social connection, and the unbridled joy of shared experiences. As festivals continue to shape and reflect the spirit of their times, one thing is certain: the music will always play on, echoing through the fields and stages that have become the vibrant landscapes of our collective memories.</p>
       </div>

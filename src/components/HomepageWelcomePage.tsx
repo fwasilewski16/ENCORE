@@ -2,11 +2,11 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import crowdImage from "../assets/images/crowd.webp";
 
-const textMain = "DISCOVER MORE OF YOUR FAVOURITE EVENTS.";
-const text = "Enjoying a night out is always a great feeling. With ENCORE's tailored event recommendations, connecting with your scene, no matter your preferences, has never been simpler.";
+const textMain: string = "DISCOVER MORE OF YOUR FAVOURITE EVENTS.";
+const text: string = "Enjoying a night out is always a great feeling. With ENCORE's tailored event recommendations, connecting with your scene, no matter your preferences, has never been simpler.";
 
 export default function WelcomePage() {
-  const [imageMove, setImageMove] = useState(false);
+  const [imageMove, setImageMove] = useState<boolean>(false);
 
   return (
     <div className="flex w-full min-w-[332px] flex-col-reverse items-center px-4 pb-16 pt-16 md:h-screen md:flex-row md:py-0 md:pt-20 lg:px-12">
@@ -29,6 +29,7 @@ export default function WelcomePage() {
       <div className="justify-end overflow-hidden py-8 align-middle md:flex md:h-full md:w-1/2">
         <img
           src={crowdImage}
+          alt="Crowd in front of a stage"
           width="656"
           height="875"
           onLoad={() => {

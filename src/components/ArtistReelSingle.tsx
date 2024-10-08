@@ -2,7 +2,16 @@ import { NavLink } from "react-router-dom";
 import useCountEvents from "../hooks/useCountEvents";
 import { useEffect, useRef } from "react";
 
-export default function ArtistSingle(props) {
+interface ArtistSingleProps {
+  id: string;
+  artistName: string;
+  img: string;
+  start: string;
+  end: string;
+  changeDirection: () => void;
+}
+
+export default function ArtistSingle(props: ArtistSingleProps): JSX.Element {
   const navlink = useRef(null);
 
   const numberOfConcerts = useCountEvents(props.id);

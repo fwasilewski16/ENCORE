@@ -1,6 +1,6 @@
 import arrow_right from "../assets/icons/right.png";
 import { NavLink } from "react-router-dom";
-import useCountEvents from "../hooks/useCountEvents";
+import useCountEvents from "../hooks/useCountEvents.ts";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../store";

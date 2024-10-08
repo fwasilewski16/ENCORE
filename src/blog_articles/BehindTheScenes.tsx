@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-const blogs = [
+interface Blog {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const blogs: Blog[] = [
   {
     id: 1,
     title: "1. The Early Stages: Concept and Planning",
@@ -43,23 +49,32 @@ const blogs = [
   },
 ];
 
-function BlogItem(props) {
+interface BlogItemProps {
+  title: string;
+  description: string;
+}
+
+function BlogItem({ title, description }: BlogItemProps) {
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-3xl font-semibold">{props.title}</h3>
-      <p className="font-semibold">{props.location}</p>
-      <p className="text-justify">{props.description}</p>
+      <h3 className="text-3xl font-semibold">{title}</h3>
+      <p className="text-justify">{description}</p>
     </div>
   );
 }
 
-export default function BehindTheScenes(props) {
-  const [revealData, setRevealData] = useState(false);
+interface BehindTheScenesProps {
+  image: string;
+}
+
+export default function BehindTheScenes(props: BehindTheScenesProps) {
+  const [revealData, setRevealData] = useState<boolean>(false);
 
   return (
     <div className="m-auto mt-16 w-full min-w-[332px] max-w-[688px] items-center px-4 md:mx-auto md:mt-20 md:px-0 xl:max-w-[60%]">
       <img
         src={props.image}
+        alt="Band member no stage in front of big crowd"
         width="1500"
         height="1000"
         onLoad={() => {
@@ -71,7 +86,7 @@ export default function BehindTheScenes(props) {
         <h2 className="mt-10 text-4xl font-semibold ">Behind the Scenes: A Day in the Life of a Concert Organizer</h2>
         <p className="text-justify">Organizing a concert is no small feat. Behind the dazzling lights, booming music, and cheering crowds lies a meticulous process that involves months of planning, coordination, and dedication. Join us for an insider's perspective as we take you behind the scenes into the bustling world of concert organizing. We've interviewed seasoned organizers and captured glimpses of what it truly takes to bring a live musical experience to fruition.</p>
         {blogs.map((blog) => (
-          <BlogItem key={blog.id} title={blog.title} location={blog.location} description={blog.description} />
+          <BlogItem key={blog.id} title={blog.title} description={blog.description} />
         ))}
         <p>In conclusion, organizing a concert is a labor of love that requires passion, attention to detail, and a resilient spirit. The individuals behind the scenes work tirelessly to create memorable experiences for audiences worldwide. The next time you attend a concert, take a moment to appreciate the intricate dance happening behind the curtains, making the magic on stage possible.</p>
       </div>

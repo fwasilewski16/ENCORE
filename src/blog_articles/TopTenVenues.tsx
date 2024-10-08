@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-const blogs = [
+interface Blog {
+  id: number;
+  title: string;
+  location: string;
+  description: string;
+}
+
+const blogs: Blog[] = [
   {
     id: 1,
     title: "1. Royal Albert Hall, London",
@@ -18,18 +25,28 @@ const blogs = [
   { id: 10, title: "10. Edinburgh Castle Esplanade, Edinburgh", location: "Location: Castlehill, Edinburgh", description: "For a truly unique concert experience, Edinburgh Castle Esplanade offers stunning views and a historic backdrop. The annual Edinburgh Military Tattoo is a highlight, but the esplanade has also welcomed international musical acts, turning the castle into a spectacular stage." },
 ];
 
-function BlogItem(props) {
+interface BlogItemsProps {
+  title: string;
+  location: string;
+  description: string;
+}
+
+function BlogItem({ title, location, description }: BlogItemsProps) {
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-3xl font-semibold">{props.title}</h3>
-      <p className="font-semibold">{props.location}</p>
-      <p className="text-justify">{props.description}</p>
+      <h3 className="text-3xl font-semibold">{title}</h3>
+      <p className="font-semibold">{location}</p>
+      <p className="text-justify">{description}</p>
     </div>
   );
 }
 
-export default function TopTenVenues(props) {
-  const [revealData, setRevealData] = useState(false);
+interface TopTenVenuesProps {
+  image: string;
+}
+
+export default function TopTenVenues(props: TopTenVenuesProps) {
+  const [revealData, setRevealData] = useState<boolean>(false);
 
   return (
     <div className="m-auto mt-16 w-full min-w-[332px] max-w-[688px] items-center px-4 md:mx-auto md:mt-20 md:px-0 xl:max-w-[60%]">

@@ -1,8 +1,20 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+interface ModalSliceInitialStateType {
+  mobileMenuVisible: boolean;
+  logInWindowVisible: boolean;
+  logOutWindowVisible: boolean;
+  searchWindowVisible: boolean;
+  eventsWindowVisible: boolean;
+  artistsWindowVisible: boolean;
+  animation: boolean;
+}
+
+const ModalSliceInitialState: ModalSliceInitialStateType = { mobileMenuVisible: false, logInWindowVisible: false, logOutWindowVisible: false, searchWindowVisible: false, eventsWindowVisible: false, artistsWindowVisible: false, animation: false };
+
 const modalSlice = createSlice({
   name: "modal",
-  initialState: { mobileMenuVisible: false, logInWindowVisible: false, logOutWindowVisible: false, searchWindowVisible: false, eventsWindowVisible: false, artistsWindowVisible: false, animation: false },
+  initialState: ModalSliceInitialState,
   reducers: {
     toggleMobileWindow(state) {
       state.mobileMenuVisible = !state.mobileMenuVisible;
@@ -27,6 +39,13 @@ const modalSlice = createSlice({
     },
   },
 });
+
+interface Event {}
+
+interface EventsSliceType {
+  events: object[];
+  isLoading: boolean;
+}
 
 const eventsSlice = createSlice({
   name: "events",

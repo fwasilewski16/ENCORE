@@ -4,7 +4,7 @@ import HomepageArtistReel from "../components/HomepageArtistReel";
 import HomepageBlog from "../components/HomepageBlog";
 import HomepageLivestream from "../components/HomepageLivestream";
 
-export default function Homepage() {
+export default function Homepage(): JSX.Element {
   useEffect(() => {
     scrollTo(0, 0);
   }, []);

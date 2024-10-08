@@ -2,20 +2,20 @@ import ArtistReelSingle from "./ArtistReelSingle";
 import { artists } from "../assets/carouselArtists";
 import { useEffect, useRef, useState } from "react";
 
-export default function ArtistReel() {
-  const carousel = useRef(null);
-  const requestId = useRef(null);
+function ArtistReel(): JSX.Element {
+  const carousel = useRef<HTMLDivElement>(null);
+  const requestId = useRef<number | null>(null);
 
-  const [scrollDirection, setScrollDirection] = useState("right");
-  const [animationPause, setAnimationPause] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState<string>("right");
+  const [animationPause, setAnimationPause] = useState<boolean>(false);
 
-  function changeDirection(direction) {
+  function changeDirection(direction: string) {
     if (scrollDirection != direction) {
       setScrollDirection(direction);
     }
   }
 
-  const animate = () => {
+  function animate() {
     if (!animationPause && carousel.current && scrollDirection === "right") {
       carousel.current.scrollBy(1, 0);
     }
@@ -23,13 +23,15 @@ export default function ArtistReel() {
       carousel.current.scrollBy(-1, 0);
     }
     requestId.current = requestAnimationFrame(animate);
-  };
+  }
 
   useEffect(() => {
     requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(requestId.current);
+      if (requestId.current) {
+        cancelAnimationFrame(requestId.current);
+      }
     };
   }, [scrollDirection, animationPause]);
 
@@ -68,3 +70,5 @@ export default function ArtistReel() {
     </div>
   );
 }
+
+export default ArtistReel;

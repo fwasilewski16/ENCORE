@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-const blogs = [
+interface Blog {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const blogs: Blog[] = [
   {
     id: 1,
     title: "1. Music Festival Vibes",
@@ -38,23 +44,32 @@ const blogs = [
   },
 ];
 
-function BlogItem(props) {
+interface BlogItemProps {
+  title: string;
+  description: string;
+}
+
+function BlogItem({ title, description }: BlogItemProps) {
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-3xl font-semibold">{props.title}</h3>
-      <p className="font-semibold">{props.location}</p>
-      <p className="text-justify">{props.description}</p>
+      <h3 className="text-3xl font-semibold">{title}</h3>
+      <p className="text-justify">{description}</p>
     </div>
   );
 }
 
-export default function ConcertFashion(props) {
-  const [revealData, setRevealData] = useState(false);
+interface ConcertFashionProps {
+  image: string;
+}
+
+export default function ConcertFashion(props: ConcertFashionProps) {
+  const [revealData, setRevealData] = useState<boolean>(false);
 
   return (
     <div className="m-auto mt-16 w-full min-w-[332px] max-w-[688px] items-center px-4 md:mx-auto md:mt-20 md:px-0 xl:max-w-[60%]">
       <img
         src={props.image}
+        alt="Three friends walking side by side thourgh a music festival field"
         width="1500"
         height="1000"
         onLoad={() => {
@@ -66,7 +81,7 @@ export default function ConcertFashion(props) {
         <h2 className="mt-10 text-4xl font-semibold ">Concert Fashion: Styling Tips for Your Next Gig</h2>
         <p className="text-justify">Attending a concert is not just about the music; it's an opportunity to express your style and immerse yourself in the energy of the event. Whether you're rocking out at a music festival or enjoying a laid-back acoustic performance, finding the right outfit can enhance your overall concert experience. Let's explore some stylish and comfortable fashion tips for your next gig.</p>
         {blogs.map((blog) => (
-          <BlogItem key={blog.id} title={blog.title} location={blog.location} description={blog.description} />
+          <BlogItem key={blog.id} title={blog.title} description={blog.description} />
         ))}
         <p>Remember, the key to the perfect concert outfit is to strike a balance between style and comfort. Whether you're dancing in a field at a festival or seated in a cozy venue, let your outfit reflect your personality and make your concert experience even more memorable. Now, go ahead and rock your style at the next gig!</p>
       </div>
