@@ -1,17 +1,18 @@
 import EventFilter from "../components/EventFilter";
 import AllEvents from "../components/AllEvents";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { eventsActions } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { Event } from "../types/types";
 
-export default function EventsPage() {
-  const dispatch = useDispatch();
+export default function EventsPage(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-  const events = useSelector((state) => state.events.events);
-  const isLoading = useSelector((state) => state.events.isLoading);
-  const [animation, setAnimation] = useState(false);
+  const events: Event[] = useAppSelector((state) => state.events.events);
+  const isLoading: boolean = useAppSelector((state) => state.events.isLoading);
+  const [animation, setAnimation] = useState<boolean>(false);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     setAnimation(true);
     return () => {
       dispatch(eventsActions.addEvents([]));

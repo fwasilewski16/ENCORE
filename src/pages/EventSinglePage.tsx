@@ -3,36 +3,44 @@ import useFetchSingleEvent from "../hooks/useFetchSingleEvent";
 import ShowTickets from "../components/ShowTickets";
 import EventSingleComponent from "../components/EventSingleComponent";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { accountActions } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { Event } from "../types/types";
 
-const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const weekDays: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-export default function EventSinglePage() {
-  const dispatch = useDispatch();
+export default function EventSinglePage(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-  const eventsList = useSelector((state) => state.account.events);
-  const loggedIn = useSelector((state) => state.login.loggedIn);
+  const eventsList = useAppSelector((state) => state.account.events);
+  const loggedIn = useAppSelector((state) => state.login.loggedIn);
 
-  const { event_id } = useParams();
+  const { event_id } = useParams<{ event_id: string }>();
 
-  const [eventSingle, isLoading, error, otherEvents] = useFetchSingleEvent(event_id);
-  const [revealData, setRevealData] = useState(false);
+  const [eventSingle, isLoading, error, otherEvents]: [eventSingle: Event | null, isLoading: boolean, error: boolean, otherEvents: Event[]] = event_id ? useFetchSingleEvent(event_id) : [null, false, false, []];
 
-  const eventSaved = eventsList.map((event) => event.event_id).includes(event_id);
+  const [revealData, setRevealData] = useState<boolean>(false);
 
-  useEffect(() => {
+  const eventSaved: boolean = event_id ? eventsList.map((event: Event): string => event.event_id).includes(event_id) : false;
+
+  useEffect((): void => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [event_id]);
 
-  function scrollToTickets() {
+  function scrollToTickets(): void {
     const element = document.getElementById("tickets-section");
-    element.scrollIntoView({ behavior: "smooth" });
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.log("Element not found");
+    }
   }
 
-  const dateUTC = new Date(eventSingle.date);
-  const date_time = `${weekDays[dateUTC.getDay()]} ${dateUTC.getDate()} ${months[dateUTC.getMonth()]} ${dateUTC.getFullYear()} ${dateUTC.getUTCHours() + 1}:${dateUTC.getUTCMinutes()}${new Date(eventSingle.date).getMinutes() === 0 ? "0" : ""}`;
+  let dateUTC: Date | null;
+  let date_time: string | null;
+  dateUTC = eventSingle && new Date(eventSingle.date);
+  date_time = dateUTC && eventSingle && `${weekDays[dateUTC.getDay()]} ${dateUTC.getDate()} ${months[dateUTC.getMonth()]} ${dateUTC.getFullYear()} ${dateUTC.getUTCHours() + 1}:${dateUTC.getUTCMinutes()}${new Date(eventSingle.date).getMinutes() === 0 ? "0" : ""}`;
 
   return (
     <div className="m-auto mt-16 md:mt-20">

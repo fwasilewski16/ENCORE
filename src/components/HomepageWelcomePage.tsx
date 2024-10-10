@@ -5,7 +5,7 @@ import crowdImage from "../assets/images/crowd.webp";
 const textMain: string = "DISCOVER MORE OF YOUR FAVOURITE EVENTS.";
 const text: string = "Enjoying a night out is always a great feeling. With ENCORE's tailored event recommendations, connecting with your scene, no matter your preferences, has never been simpler.";
 
-export default function WelcomePage() {
+export default function WelcomePage(): JSX.Element {
   const [imageMove, setImageMove] = useState<boolean>(false);
 
   return (
@@ -32,7 +32,7 @@ export default function WelcomePage() {
           alt="Crowd in front of a stage"
           width="656"
           height="875"
-          onLoad={() => {
+          onLoad={(): void => {
             setImageMove(true);
           }}
           className={`min-h-full object-cover transition delay-100 duration-700 ease-out md:h-full md:w-auto ${!imageMove && "opacity-0 md:translate-x-full"}`}

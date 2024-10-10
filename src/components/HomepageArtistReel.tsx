@@ -9,13 +9,13 @@ function ArtistReel(): JSX.Element {
   const [scrollDirection, setScrollDirection] = useState<string>("right");
   const [animationPause, setAnimationPause] = useState<boolean>(false);
 
-  function changeDirection(direction: string) {
+  function changeDirection(direction: string): void {
     if (scrollDirection != direction) {
       setScrollDirection(direction);
     }
   }
 
-  function animate() {
+  function animate(): void {
     if (!animationPause && carousel.current && scrollDirection === "right") {
       carousel.current.scrollBy(1, 0);
     }
@@ -42,28 +42,32 @@ function ArtistReel(): JSX.Element {
         <div
           ref={carousel}
           className="mb-6 flex max-w-[100vw] overflow-x-scroll pb-6 md:overflow-x-hidden"
-          onTouchStart={() => {
+          onTouchStart={(): void => {
             setAnimationPause(true);
           }}
-          onTouchEnd={() => {
+          onTouchEnd={(): void => {
             setTimeout(() => {
               setAnimationPause(false);
             }, 3000);
           }}
-          onMouseEnter={() => {
+          onMouseEnter={(): void => {
             setAnimationPause(true);
           }}
-          onMouseLeave={() => {
+          onMouseLeave={(): void => {
             setAnimationPause(false);
           }}
         >
           <div className="flex w-auto">
-            {artists.map((artist) => (
-              <ArtistReelSingle key={artist.id} id={artist.id} artistName={artist.artistName} img={artist.img} start={artist.id === "taylor_swift" && true} changeDirection={changeDirection} />
-            ))}
-            {artists.map((artist) => (
-              <ArtistReelSingle key={artist.id} id={artist.id} artistName={artist.artistName} img={artist.img} end={artist.id === "pj_harvey" && true} changeDirection={changeDirection} />
-            ))}
+            {artists.map(
+              (artist): JSX.Element => (
+                <ArtistReelSingle key={artist.id + ".1"} id={artist.id} artistName={artist.artistName} img={artist.img} start={artist.id === "taylor_swift"} changeDirection={changeDirection} />
+              ),
+            )}
+            {artists.map(
+              (artist): JSX.Element => (
+                <ArtistReelSingle key={artist.id + ".2"} id={artist.id} artistName={artist.artistName} img={artist.img} end={artist.id === "pj_harvey"} changeDirection={changeDirection} />
+              ),
+            )}
           </div>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import useFetchStreams from "../hooks/useFetchStreams";
 import LivestreamSingle from "./LivestreamSingle";
+import { Stream } from "../types/types";
 
-export default function LivestreamHomepage() {
+export default function LivestreamHomepage(): JSX.Element {
   const [streams, isLoading, error] = useFetchStreams();
 
   return (
@@ -10,7 +11,7 @@ export default function LivestreamHomepage() {
       {isLoading && <p>Loading...</p>}
       {error && <p>Something went wrong</p>}
       <div className="">
-        {streams.map((stream) => (
+        {streams.map((stream: Stream) => (
           <LivestreamSingle image={stream.image} name={stream.name} date={stream.date} key={stream._id} />
         ))}
       </div>

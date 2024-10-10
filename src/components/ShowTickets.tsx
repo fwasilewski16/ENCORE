@@ -3,7 +3,15 @@ import down from "../assets/icons/down.png";
 import add from "../assets/icons/add.png";
 import remove from "../assets/icons/remove.png";
 
-function Prices(props) {
+interface PricesProps {
+  type: string;
+  price: string;
+  counter: number;
+  onClickMinus: () => void;
+  onClickPlus: () => void;
+}
+
+function Prices(props: PricesProps): JSX.Element {
   return (
     <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
       <div className="flex w-full justify-between ">
@@ -26,19 +34,24 @@ function Prices(props) {
   );
 }
 
-export default function ShowTickets(props) {
-  const [generalAdmissionPrice, goldenCirclePrice, vipPrice] = props.tickets;
-  const [gaCounter, setGaCounter] = useState(0);
-  const [gsCounter, setGsCounter] = useState(0);
-  const [vipCounter, setVipCounter] = useState(0);
+interface ShowTicketsProps {
+  website: string;
+  tickets: string[];
+}
 
-  const [expand, setExpand] = useState("");
+export default function ShowTickets(props: ShowTicketsProps): JSX.Element {
+  const [generalAdmissionPrice, goldenCirclePrice, vipPrice]: string[] = props.tickets;
+  const [gaCounter, setGaCounter] = useState<number>(0);
+  const [gsCounter, setGsCounter] = useState<number>(0);
+  const [vipCounter, setVipCounter] = useState<number>(0);
+
+  const [expand, setExpand] = useState<boolean>(false);
 
   return (
     <div className="flex max-w-full flex-col">
       <button
         className={`mb-3 flex h-16 max-w-full items-center justify-between rounded-lg border-2 px-4 transition duration-500 ${expand && "shadow-lg"}`}
-        onClick={() => {
+        onClick={(): void => {
           setExpand((prevState) => !prevState);
           setGaCounter(0);
           setGsCounter(0);
@@ -52,14 +65,13 @@ export default function ShowTickets(props) {
         <Prices
           type={"General Admission"}
           price={generalAdmissionPrice}
-          expand={expand}
           counter={gaCounter}
-          onClickMinus={() => {
+          onClickMinus={(): void => {
             setGsCounter(0);
             setVipCounter(0);
             setGaCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
           }}
-          onClickPlus={() => {
+          onClickPlus={(): void => {
             setGsCounter(0);
             setVipCounter(0);
             setGaCounter((prevCounter) => prevCounter + 1);
@@ -68,14 +80,13 @@ export default function ShowTickets(props) {
         <Prices
           type={"Golden Circle"}
           price={goldenCirclePrice}
-          expand={expand}
           counter={gsCounter}
-          onClickMinus={() => {
+          onClickMinus={(): void => {
             setGaCounter(0);
             setVipCounter(0);
             setGsCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
           }}
-          onClickPlus={() => {
+          onClickPlus={(): void => {
             setGaCounter(0);
             setVipCounter(0);
             setGsCounter((prevCounter) => prevCounter + 1);
@@ -84,14 +95,13 @@ export default function ShowTickets(props) {
         <Prices
           type={"VIP"}
           price={vipPrice}
-          expand={expand}
           counter={vipCounter}
-          onClickMinus={() => {
+          onClickMinus={(): void => {
             setGaCounter(0);
             setGsCounter(0);
             setVipCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
           }}
-          onClickPlus={() => {
+          onClickPlus={(): void => {
             setGaCounter(0);
             setGsCounter(0);
             setVipCounter((prevCounter) => prevCounter + 1);

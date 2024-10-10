@@ -6,15 +6,15 @@ interface ArtistSingleProps {
   id: string;
   artistName: string;
   img: string;
-  start: string;
-  end: string;
-  changeDirection: () => void;
+  start?: boolean;
+  end?: boolean;
+  changeDirection: (direction: string) => void;
 }
 
 export default function ArtistSingle(props: ArtistSingleProps): JSX.Element {
-  const navlink = useRef(null);
+  const navlink = useRef<HTMLAnchorElement | null>(null);
 
-  const numberOfConcerts = useCountEvents(props.id);
+  const numberOfConcerts: number = useCountEvents(props.id);
 
   useEffect(() => {
     const observerStart = new IntersectionObserver((entries) => {
@@ -33,14 +33,14 @@ export default function ArtistSingle(props: ArtistSingleProps): JSX.Element {
         }, 2000);
     });
 
-    props.start && observerStart.observe(navlink.current);
-    props.end && observerEnd.observe(navlink.current);
+    props.start && navlink.current && observerStart.observe(navlink.current);
+    props.end && navlink.current && observerEnd.observe(navlink.current);
 
     return () => {
       observerStart.disconnect();
       observerEnd.disconnect();
     };
-  });
+  }, []);
 
   return (
     <NavLink ref={navlink} to={`/artists/${props.id}`} className="mx-2 w-36 lg:w-48">

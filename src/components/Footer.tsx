@@ -4,8 +4,8 @@ import twitter from "../assets/icons/twitter.png";
 import facebook from "../assets/icons/facebook.png";
 import instagram from "../assets/icons/instagram.png";
 
-export default function Footer() {
-  function scrollUp() {
+export default function Footer(): JSX.Element {
+  function scrollUp(): void {
     window.scrollTo(0, 0);
   }
 

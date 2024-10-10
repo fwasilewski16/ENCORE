@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { Event } from "../types/types";
 
-export default function useFetchSearch(filter) {
-  const [events, setEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+export default function useFetchSearch(filter: string): [events: Event[], isLoading: boolean, error: boolean] {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
-  useEffect(() => {
-    async function fetchData(filter) {
+  useEffect((): void => {
+    async function fetchData(filter: string) {
       setIsLoading(true);
       try {
         const response = await fetch(`https://backend-portfolio-wasilewski.fly.dev/encore/events/search?filter=${filter}`);

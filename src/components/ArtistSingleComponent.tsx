@@ -1,20 +1,27 @@
 import arrow_right from "../assets/icons/right.png";
 import { NavLink } from "react-router-dom";
-import useCountEvents from "../hooks/useCountEvents.ts";
+import useCountEvents from "../hooks/useCountEvents";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { modalActions } from "../store";
+import { useAppDispatch } from "../store/hooks";
 
-export default function ArtistSingleComponent(props) {
-  const dispatch = useDispatch();
+interface ArtistSingleComponentProps {
+  img: string;
+  name: string;
+  artist_id: string;
+  function: string;
+}
 
-  const [revealData, setRevealData] = useState(false);
+export default function ArtistSingleComponent(props: ArtistSingleComponentProps): JSX.Element {
+  const dispatch = useAppDispatch();
 
-  const numberOfConcerts = useCountEvents(props.artist_id);
+  const [revealData, setRevealData] = useState<boolean>(false);
 
-  function onClick() {
+  const numberOfConcerts: number = useCountEvents(props.artist_id);
+
+  function onClick(): void {
     props.function && dispatch(modalActions.toggleAnimation());
-    setTimeout(() => {
+    setTimeout((): void => {
       props.function === "artists" && dispatch(modalActions.toggleArtistsWindow());
     }, 500);
   }
@@ -25,7 +32,7 @@ export default function ArtistSingleComponent(props) {
         <div className={`h-[88px] w-[88px] ${props.function === "artists" ? "rounded-lg" : "rounded-full"} bg-gray-300`}>
           <img
             src={props.img}
-            onLoad={() => {
+            onLoad={(): void => {
               setRevealData(true);
             }}
             loading="lazy"

@@ -1,17 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
 import useFetchEvents from "../hooks/useFetchEvents";
 import { eventsActions } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
-export default function EventFilter(props) {
-  const dispatch = useDispatch();
+interface EventFilterProps {
+  animation: boolean;
+}
 
-  const [city, dateFrom, dateTo] = useFetchEvents();
-  const isLoading = useSelector((state) => state.events.isLoading);
+export default function EventFilter(props: EventFilterProps): JSX.Element {
+  const dispatch = useAppDispatch();
 
-  function CityButton(props) {
+  const [city, dateFrom, dateTo]: [city: string, dateFrom: string, dateTo: string] = useFetchEvents();
+
+  function CityButton(props: { city: string }): JSX.Element {
     return (
       <button
-        onClick={() => {
+        onClick={(): void => {
           dispatch(eventsActions.cityHandler(props.city));
         }}
         className={`rounded-2xl border-2 border-black px-2 py-1 ${props.city === city && "bg-black text-white"}`}
@@ -39,7 +42,7 @@ export default function EventFilter(props) {
           placeholder="From"
           type="date"
           className="rounded-2xl border-2 border-black px-2 py-1"
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
             dispatch(eventsActions.dateFromHandler(e.target.value));
           }}
         ></input>
@@ -48,14 +51,14 @@ export default function EventFilter(props) {
           placeholder="To"
           type="date"
           className="rounded-2xl border-2 border-black px-2 py-1"
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
             dispatch(eventsActions.dateToHandler(e.target.value));
           }}
         ></input>
         {(dateFrom != "" || dateTo != "") && (
           <button
             className="px-1 text-sm"
-            onClick={() => {
+            onClick={(): void => {
               dispatch(eventsActions.dateFromHandler(""));
               dispatch(eventsActions.dateToHandler(""));
             }}

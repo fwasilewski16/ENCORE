@@ -2,12 +2,12 @@ import { NavLink } from "react-router-dom";
 import { blogs } from "../assets/blogs";
 import { useRef, useEffect, useState } from "react";
 
-export default function BlogMainPage() {
-  const blog1Ref = useRef();
-  const blog2Ref = useRef();
+export default function BlogMainPage(): JSX.Element {
+  const blog1Ref = useRef<HTMLAnchorElement | null>(null);
+  const blog2Ref = useRef<HTMLAnchorElement | null>(null);
 
-  const [blog1Visible, setBlog1Visible] = useState(false);
-  const [blog2Visible, setBlog2Visible] = useState(false);
+  const [blog1Visible, setBlog1Visible] = useState<boolean>(false);
+  const [blog2Visible, setBlog2Visible] = useState<boolean>(false);
 
   useEffect(() => {
     const observer1 = new IntersectionObserver((entries) => {
@@ -20,8 +20,8 @@ export default function BlogMainPage() {
       entry && setBlog2Visible(true);
     });
 
-    observer1.observe(blog1Ref.current);
-    observer2.observe(blog2Ref.current);
+    blog1Ref.current && observer1.observe(blog1Ref.current);
+    blog2Ref.current && observer2.observe(blog2Ref.current);
 
     return () => {
       observer1.disconnect();

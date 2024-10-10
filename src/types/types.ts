@@ -12,4 +12,23 @@ export interface Event {
   venue: string;
   img: string;
   artist_name: string;
+  venue_url?: string;
+  venue_address?: string;
+  bio?: string;
+}
+
+export interface Artist {
+  _id: string;
+  bio: string;
+  artist_id: string;
+  img: string;
+  name: string;
+}
+
+export interface Stream {
+  _id: string;
+  date: string;
+  artist_id: string;
+  image: string;
+  name: string;
 }

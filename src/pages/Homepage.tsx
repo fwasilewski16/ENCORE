@@ -5,7 +5,7 @@ import HomepageBlog from "../components/HomepageBlog";
 import HomepageLivestream from "../components/HomepageLivestream";
 
 export default function Homepage(): JSX.Element {
-  useEffect(() => {
+  useEffect((): void => {
     scrollTo(0, 0);
   }, []);
 

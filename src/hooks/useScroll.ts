@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function useScroll() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [scrollDirectionDown, setScrollDirectionDown] = useState(false);
+export default function useScroll(): boolean {
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const [scrollDirectionDown, setScrollDirectionDown] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const newPosition = window.pageYOffset;
+  useEffect((): (() => void) => {
+    function handleScroll(): void {
+      const newPosition: number = window.scrollY;
       if (scrollPosition > 80) {
         if (scrollPosition > newPosition) {
           setScrollDirectionDown(false);
@@ -14,8 +14,8 @@ export default function useScroll() {
           setScrollDirectionDown(true);
         }
       }
-      setScrollPosition(window.pageYOffset);
-    };
+      setScrollPosition(window.scrollY);
+    }
 
     window.addEventListener("scroll", handleScroll);
 
