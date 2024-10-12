@@ -2,28 +2,22 @@ import arrow_right from "../assets/icons/right.png";
 import { NavLink } from "react-router-dom";
 import useCountEvents from "../hooks/useCountEvents";
 import { useState } from "react";
-import { modalActions } from "../store";
-import { useAppDispatch } from "../store/hooks";
 
 interface ArtistSingleComponentProps {
   img: string;
   name: string;
   artist_id: string;
   function: string;
+  exitHandler: () => void;
 }
 
 export default function ArtistSingleComponent(props: ArtistSingleComponentProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
   const [revealData, setRevealData] = useState<boolean>(false);
 
   const numberOfConcerts: number = useCountEvents(props.artist_id);
 
   function onClick(): void {
-    props.function && dispatch(modalActions.toggleAnimation());
-    setTimeout((): void => {
-      props.function === "artists" && dispatch(modalActions.toggleArtistsWindow());
-    }, 500);
+    props.function === "modalWindow" && props.exitHandler;
   }
 
   return (

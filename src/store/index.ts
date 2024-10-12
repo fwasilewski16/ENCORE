@@ -1,46 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Event, Artist } from "../types/types";
 
-interface ModalSliceStateType {
-  mobileMenuVisible: boolean;
-  logInWindowVisible: boolean;
-  logOutWindowVisible: boolean;
-  searchWindowVisible: boolean;
-  eventsWindowVisible: boolean;
-  artistsWindowVisible: boolean;
-  animation: boolean;
-}
-
-const modalSliceInitialState: ModalSliceStateType = { mobileMenuVisible: false, logInWindowVisible: false, logOutWindowVisible: false, searchWindowVisible: false, eventsWindowVisible: false, artistsWindowVisible: false, animation: false };
-
-const modalSlice = createSlice({
-  name: "modal",
-  initialState: modalSliceInitialState,
-  reducers: {
-    toggleMobileWindow(state) {
-      state.mobileMenuVisible = !state.mobileMenuVisible;
-    },
-    togglelogInWindow(state) {
-      state.logInWindowVisible = !state.logInWindowVisible;
-    },
-    togglelogOutWindow(state) {
-      state.logOutWindowVisible = !state.logOutWindowVisible;
-    },
-    toggleSearchWindow(state) {
-      state.searchWindowVisible = !state.searchWindowVisible;
-    },
-    toggleEventsWindow(state) {
-      state.eventsWindowVisible = !state.eventsWindowVisible;
-    },
-    toggleArtistsWindow(state) {
-      state.artistsWindowVisible = !state.artistsWindowVisible;
-    },
-    toggleAnimation(state) {
-      state.animation = !state.animation;
-    },
-  },
-});
-
 interface EventsSliceStateType {
   events: Event[];
   isLoading: boolean;
@@ -157,10 +117,9 @@ const accountSlice = createSlice({
 });
 
 const store = configureStore({
-  reducer: { modal: modalSlice.reducer, login: loginSlice.reducer, accountWindow: accountWindowSlice.reducer, account: accountSlice.reducer, events: eventsSlice.reducer },
+  reducer: { login: loginSlice.reducer, accountWindow: accountWindowSlice.reducer, account: accountSlice.reducer, events: eventsSlice.reducer },
 });
 
-export const modalActions = modalSlice.actions;
 export const eventsActions = eventsSlice.actions;
 export const loginActions = loginSlice.actions;
 export const accountWindowActions = accountWindowSlice.actions;

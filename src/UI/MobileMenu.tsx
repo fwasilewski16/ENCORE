@@ -5,9 +5,7 @@ interface MobileMenuProps {
   animation: boolean;
   exitHandler: () => void;
   loggedIn: boolean;
-  setLogInWindowVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setMobileMenuVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setLogOutWindowVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setWindowVisible: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MobileMenu(props: MobileMenuProps): JSX.Element {
@@ -33,8 +31,7 @@ export default function MobileMenu(props: MobileMenuProps): JSX.Element {
           {!props.loggedIn && (
             <button
               onClick={(): void => {
-                props.setMobileMenuVisible(false);
-                props.setLogInWindowVisible(true);
+                props.setWindowVisible("logInWindow");
               }}
               className="h-12 w-32 items-center rounded-full bg-black px-4 text-white"
             >
@@ -44,8 +41,7 @@ export default function MobileMenu(props: MobileMenuProps): JSX.Element {
           {props.loggedIn && (
             <button
               onClick={(): void => {
-                props.setLogOutWindowVisible(true);
-                props.setMobileMenuVisible(false);
+                props.setWindowVisible("logOutWindow");
               }}
               className="h-12 w-32 items-center rounded-full bg-black px-4 text-white"
             >

@@ -1,21 +1,13 @@
-import { useEffect, useState } from "react";
-import { modalActions } from "../store";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useEffect } from "react";
 
-export default function useScreenWidth(): number {
-  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const dispatch = useAppDispatch();
-  const mobileMenuVisible: boolean = useAppSelector((state) => state.modal.mobileMenuVisible);
-
+export default function useScreenWidth(windowVisible: string, setWindowVisible: React.Dispatch<React.SetStateAction<string>>): void {
   useEffect((): (() => void) => {
     function handleChange(): void {
-      const newWidth: number = window.innerWidth;
-      if (mobileMenuVisible) {
-        if (newWidth > 772) {
-          dispatch(modalActions.toggleMobileWindow());
+      if (windowVisible === "mobileMenu") {
+        if (window.innerWidth > 772) {
+          setWindowVisible("none");
         }
       }
-      setScreenWidth(newWidth);
     }
 
     window.addEventListener("resize", handleChange);
@@ -23,7 +15,5 @@ export default function useScreenWidth(): number {
     return (): void => {
       window.removeEventListener("resize", handleChange);
     };
-  }, []);
-
-  return screenWidth;
+  }, [windowVisible, setWindowVisible]);
 }

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import arrow_right from "../assets/icons/right.png";
 import { NavLink } from "react-router-dom";
-import { modalActions } from "../store";
-import { useAppDispatch } from "../store/hooks";
 
 const weekDays: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -15,22 +13,17 @@ interface EventSingleComponentProps {
   venue: string;
   city: string;
   function: string;
+  exitHandler?: () => void;
 }
 
 export default function EventSingleComponent(props: EventSingleComponentProps): JSX.Element {
   const [revealData, setRevealData] = useState<boolean>(false);
 
-  const dispatch = useAppDispatch();
-
   const dateUTC: Date = new Date(props.date);
   const date_time: string = `${weekDays[dateUTC.getDay()]} ${dateUTC.getDate()} ${months[dateUTC.getMonth()]} ${dateUTC.getFullYear()} ${dateUTC.getUTCHours() + 1}:${dateUTC.getUTCMinutes()}${new Date(props.date).getMinutes() === 0 ? "0" : ""}`;
 
   function onClick(): void {
-    props.function && dispatch(modalActions.toggleAnimation());
-    setTimeout((): void => {
-      props.function === "search" && dispatch(modalActions.toggleSearchWindow());
-      props.function === "events" && dispatch(modalActions.toggleEventsWindow());
-    }, 500);
+    props.exitHandler && props.exitHandler();
   }
 
   return (

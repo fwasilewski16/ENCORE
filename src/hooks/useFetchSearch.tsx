@@ -7,7 +7,13 @@ export default function useFetchSearch(filter: string): [events: Event[], isLoad
   const [error, setError] = useState<boolean>(false);
 
   useEffect((): void => {
+    if (filter === "") {
+      setEvents([]);
+      setError(false);
+      return;
+    }
     async function fetchData(filter: string) {
+      setError(false);
       setIsLoading(true);
       try {
         const response = await fetch(`https://backend-portfolio-wasilewski.fly.dev/encore/events/search?filter=${filter}`);
@@ -16,9 +22,12 @@ export default function useFetchSearch(filter: string): [events: Event[], isLoad
         }
         const data = await response.json();
         setEvents(data);
-        setIsLoading(false);
       } catch (error) {
         setError(true);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 750);
       }
     }
 

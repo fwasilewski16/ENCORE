@@ -4,7 +4,7 @@ import logo_small from "../assets/logos/logo_small.webp";
 import search_icon from "../assets/icons/search.png";
 import user_icon from "../assets/icons/profile-user.png";
 import menu_icon from "../assets/icons/menu.png";
-import { accountWindowActions, modalActions } from "../store";
+import { accountWindowActions } from "../store";
 import MobileMenu from "../UI/MobileMenu";
 import useScreenWidth from "../hooks/useScreenWidth";
 import NavbarNavlink from "../UI/NavbarNavlink";
@@ -14,7 +14,7 @@ import AccountWindow from "../UI/AccountWindow";
 import SearchWindow from "../UI/SearchWindow";
 import MyEventsWindow from "../UI/MyEventsWindow";
 import MyArtistsWindow from "../UI/MyArtistsWindow";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
 import { useState } from "react";
 
 const liClass: string = "flex h-full items-center";
@@ -25,61 +25,55 @@ export default function Navbar(): JSX.Element {
   const scrollDirectionDown: boolean = useScroll();
 
   const [animation, setAnimation] = useState<boolean>(false);
-  const [mobileMenuVisible, setMobileMenuVisible] = useState<boolean>(false);
+
+  const [windowVisible, setWindowVisible] = useState<string>("none");
+
   const [logInWindowVisible, setLogInWindowVisible] = useState<boolean>(false);
   const [logOutWindowVisible, setLogOutWindowVisible] = useState<boolean>(false);
   const [searchWindowVisible, setSearchWindowVisible] = useState<boolean>(false);
-  const eventsWindowVisible: boolean = useAppSelector((state) => state.modal.eventsWindowVisible);
-  const artistsWindowVisible: boolean = useAppSelector((state) => state.modal.artistsWindowVisible);
   const [accountWindowVisible, setAccountWindowVisible] = useState<boolean>(false);
+  const [accountWindowAnimation, setAccountWindowAnimation] = useState<boolean>(false);
+  const [eventsWindowVisible, setEventsWindowVisible] = useState<boolean>(false);
+  const [artistsWindowVisible, setArtistsWindowVisible] = useState<boolean>(false);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
-  useScreenWidth();
+  function exitHandler(): void {
+    setAnimation(false);
+    setTimeout((): void => {
+      setWindowVisible("none");
+    }, 500);
+  }
+
+  useScreenWidth(windowVisible, exitHandler);
 
   return (
     <div className={`fixed top-0 z-50 flex h-16 w-full justify-between bg-white bg-opacity-40 px-4 shadow-md backdrop-blur-sm transition duration-500 ease-in-out md:mt-0 md:h-20 lg:px-12 ${animation ? "-translate-y-full" : ""} ${scrollDirectionDown && !accountWindowVisible ? "-translate-y-24" : ""}`}>
-      {mobileMenuVisible && (
-        <MobileMenu
+      {windowVisible === "mobileMenu" && <MobileMenu animation={animation} exitHandler={exitHandler} loggedIn={loggedIn} setWindowVisible={setWindowVisible} />}
+      {windowVisible === "logInWindow" && <LogInWindow animation={animation} exitHandler={exitHandler} setLoggedIn={setLoggedIn} />}
+      {windowVisible === "logOutWindow" && <LogOutWindow animation={animation} exitHandler={exitHandler} setLoggedIn={setLoggedIn} />}
+      {windowVisible === "searchWindow" && <SearchWindow animation={animation} exitHandler={exitHandler} />}
+      {eventsWindowVisible && (
+        <MyEventsWindow
           animation={animation}
           exitHandler={() => {
             setAnimation(false);
             setTimeout((): void => {
-              setMobileMenuVisible(false);
+              setEventsWindowVisible(false);
             }, 500);
           }}
-          loggedIn={loggedIn}
-          setLogInWindowVisible={setLogInWindowVisible}
-          setMobileMenuVisible={setMobileMenuVisible}
-          setLogOutWindowVisible={setLogOutWindowVisible}
         />
       )}
-      {logInWindowVisible && (
-        <LogInWindow
+      {artistsWindowVisible && (
+        <MyArtistsWindow
           animation={animation}
           exitHandler={() => {
             setAnimation(false);
             setTimeout((): void => {
-              setLogInWindowVisible(false);
+              setArtistsWindowVisible(false);
             }, 500);
           }}
-          setLoggedIn={setLoggedIn}
         />
       )}
-      {logOutWindowVisible && (
-        <LogOutWindow
-          animation={animation}
-          exitHandler={() => {
-            setAnimation(false);
-            setTimeout((): void => {
-              setLogOutWindowVisible(false);
-            }, 500);
-          }}
-          setLoggedIn={setLoggedIn}
-        />
-      )}
-      {searchWindowVisible && <SearchWindow />}
-      {eventsWindowVisible && <MyEventsWindow />}
-      {artistsWindowVisible && <MyArtistsWindow />}
       <div className={`flex items-center transition duration-500 `}>
         <NavLink to="/">
           <img src={logo_small} className="max-h-8" />
@@ -113,21 +107,21 @@ export default function Navbar(): JSX.Element {
                   src={user_icon}
                   onClick={(): void => {
                     if (!accountWindowVisible) {
-                      dispatch(accountWindowActions.toggleAccountWindow());
+                      setAccountWindowVisible(true);
                       setTimeout(() => {
-                        dispatch(accountWindowActions.toggleAnimation());
+                        setAccountWindowAnimation(true);
                       }, 1);
                     } else {
-                      dispatch(accountWindowActions.toggleAnimation());
+                      setAccountWindowAnimation(false);
                       setTimeout(() => {
-                        dispatch(accountWindowActions.toggleAccountWindow());
+                        setAccountWindowVisible(false);
                       }, 500);
                     }
                   }}
                   className="max-h-9 rounded-full"
                 />
               </button>
-              {accountWindowVisible && <AccountWindow />}
+              {accountWindowVisible && <AccountWindow animation={accountWindowAnimation} setAccountWindowAnimation={setAccountWindowAnimation} setAccountWindowVisible={setAccountWindowVisible} setLogOutWindowVisible={setLogOutWindowVisible} setAnimation={setAnimation} setEventsWindowVisible={setEventsWindowVisible} setArtistsWindowVisible={setArtistsWindowVisible} />}
             </div>
           )}
           <div className="flex h-full items-center">
@@ -136,10 +130,10 @@ export default function Navbar(): JSX.Element {
                 src={search_icon}
                 className="max-h-9 rounded-full"
                 onClick={(): void => {
-                  dispatch(modalActions.toggleSearchWindow());
-                  accountWindowVisible && dispatch(accountWindowActions.toggleAnimation());
-                  setTimeout(() => {
-                    dispatch(modalActions.toggleAnimation());
+                  setWindowVisible("searchWindow");
+                  accountWindowVisible && setAccountWindowVisible(false);
+                  setTimeout((): void => {
+                    setAnimation(true);
                   }, 1);
                   setTimeout(() => {
                     accountWindowVisible && dispatch(accountWindowActions.toggleAccountWindow());
@@ -154,7 +148,7 @@ export default function Navbar(): JSX.Element {
                 src={menu_icon}
                 className="max-h-9"
                 onClick={(): void => {
-                  setMobileMenuVisible(true);
+                  setWindowVisible("mobileMenu");
                   accountWindowVisible && setAccountWindowVisible(false);
                   setTimeout((): void => {
                     setAnimation(true);

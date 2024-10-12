@@ -1,6 +1,4 @@
 import Modal from "./Modal";
-import { modalActions, loginActions } from "../store";
-import { useAppDispatch } from "../store/hooks";
 
 interface LogOutWindowProps {
   animation: boolean;
@@ -9,8 +7,6 @@ interface LogOutWindowProps {
 }
 
 export default function LogOutWindow(props: LogOutWindowProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
   return (
     <Modal animation={props.animation} exitHandler={props.exitHandler}>
       <div className="mx-auto flex flex-col rounded-lg bg-white px-8 py-10 md:w-[500px]">
