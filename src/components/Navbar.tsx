@@ -4,7 +4,6 @@ import logo_small from "../assets/logos/logo_small.webp";
 import search_icon from "../assets/icons/search.png";
 import user_icon from "../assets/icons/profile-user.png";
 import menu_icon from "../assets/icons/menu.png";
-import { accountWindowActions } from "../store";
 import MobileMenu from "../UI/MobileMenu";
 import useScreenWidth from "../hooks/useScreenWidth";
 import NavbarNavlink from "../UI/NavbarNavlink";
@@ -14,27 +13,19 @@ import AccountWindow from "../UI/AccountWindow";
 import SearchWindow from "../UI/SearchWindow";
 import MyEventsWindow from "../UI/MyEventsWindow";
 import MyArtistsWindow from "../UI/MyArtistsWindow";
-import { useAppDispatch } from "../store/hooks";
 import { useState } from "react";
 
 const liClass: string = "flex h-full items-center";
 
 export default function Navbar(): JSX.Element {
-  const dispatch = useAppDispatch();
-
   const scrollDirectionDown: boolean = useScroll();
 
   const [animation, setAnimation] = useState<boolean>(false);
 
   const [windowVisible, setWindowVisible] = useState<string>("none");
 
-  const [logInWindowVisible, setLogInWindowVisible] = useState<boolean>(false);
-  const [logOutWindowVisible, setLogOutWindowVisible] = useState<boolean>(false);
-  const [searchWindowVisible, setSearchWindowVisible] = useState<boolean>(false);
   const [accountWindowVisible, setAccountWindowVisible] = useState<boolean>(false);
   const [accountWindowAnimation, setAccountWindowAnimation] = useState<boolean>(false);
-  const [eventsWindowVisible, setEventsWindowVisible] = useState<boolean>(false);
-  const [artistsWindowVisible, setArtistsWindowVisible] = useState<boolean>(false);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   function exitHandler(): void {
@@ -52,28 +43,8 @@ export default function Navbar(): JSX.Element {
       {windowVisible === "logInWindow" && <LogInWindow animation={animation} exitHandler={exitHandler} setLoggedIn={setLoggedIn} />}
       {windowVisible === "logOutWindow" && <LogOutWindow animation={animation} exitHandler={exitHandler} setLoggedIn={setLoggedIn} />}
       {windowVisible === "searchWindow" && <SearchWindow animation={animation} exitHandler={exitHandler} />}
-      {eventsWindowVisible && (
-        <MyEventsWindow
-          animation={animation}
-          exitHandler={() => {
-            setAnimation(false);
-            setTimeout((): void => {
-              setEventsWindowVisible(false);
-            }, 500);
-          }}
-        />
-      )}
-      {artistsWindowVisible && (
-        <MyArtistsWindow
-          animation={animation}
-          exitHandler={() => {
-            setAnimation(false);
-            setTimeout((): void => {
-              setArtistsWindowVisible(false);
-            }, 500);
-          }}
-        />
-      )}
+      {windowVisible === "eventsWindow" && <MyEventsWindow animation={animation} exitHandler={exitHandler} />}
+      {windowVisible === "artistsWindow" && <MyArtistsWindow animation={animation} exitHandler={exitHandler} />}
       <div className={`flex items-center transition duration-500 `}>
         <NavLink to="/">
           <img src={logo_small} className="max-h-8" />
@@ -89,7 +60,7 @@ export default function Navbar(): JSX.Element {
             <button
               className="hidden h-9 items-center rounded-full bg-black px-4 font-inter text-white md:m-4 md:flex xl:m-8"
               onClick={(): void => {
-                setLogInWindowVisible(true);
+                setWindowVisible("logInWindow");
                 setTimeout(() => {
                   setAnimation(true);
                 }, 1);
@@ -121,7 +92,7 @@ export default function Navbar(): JSX.Element {
                   className="max-h-9 rounded-full"
                 />
               </button>
-              {accountWindowVisible && <AccountWindow animation={accountWindowAnimation} setAccountWindowAnimation={setAccountWindowAnimation} setAccountWindowVisible={setAccountWindowVisible} setLogOutWindowVisible={setLogOutWindowVisible} setAnimation={setAnimation} setEventsWindowVisible={setEventsWindowVisible} setArtistsWindowVisible={setArtistsWindowVisible} />}
+              {accountWindowVisible && <AccountWindow animation={accountWindowAnimation} setAccountWindowAnimation={setAccountWindowAnimation} setAccountWindowVisible={setAccountWindowVisible} setWindowVisible={setWindowVisible} setAnimation={setAnimation} />}
             </div>
           )}
           <div className="flex h-full items-center">
@@ -135,9 +106,6 @@ export default function Navbar(): JSX.Element {
                   setTimeout((): void => {
                     setAnimation(true);
                   }, 1);
-                  setTimeout(() => {
-                    accountWindowVisible && dispatch(accountWindowActions.toggleAccountWindow());
-                  }, 499);
                 }}
               />
             </button>
@@ -153,9 +121,6 @@ export default function Navbar(): JSX.Element {
                   setTimeout((): void => {
                     setAnimation(true);
                   }, 1);
-                  setTimeout((): void => {
-                    accountWindowVisible && dispatch(accountWindowActions.toggleAccountWindow());
-                  }, 499);
                 }}
               />
             </button>

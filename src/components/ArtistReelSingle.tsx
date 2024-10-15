@@ -12,7 +12,7 @@ interface ArtistSingleProps {
 }
 
 export default function ArtistSingle(props: ArtistSingleProps): JSX.Element {
-  const navlink = useRef<HTMLAnchorElement | null>(null);
+  const navlink = useRef<HTMLAnchorElement>(null);
 
   const numberOfConcerts: number = useCountEvents(props.id);
 

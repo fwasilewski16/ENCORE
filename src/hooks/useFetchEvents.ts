@@ -1,31 +1,32 @@
-import { eventsActions } from "../store";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Event } from "../types/types";
 
-export default function useFetchEvents(): [city: string, dateFrom: string, dateTo: string] {
-  const dispatch = useAppDispatch();
+interface FetchEventsParams {
+  filter: { city: string; dateFrom: string; dateTo: string };
+  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const { city, dateFrom, dateTo }: { city: string; dateFrom: string; dateTo: string } = useAppSelector((state) => state.events.filter);
-
+export default function useFetchEvents({ filter, setEvents, setIsLoading, setError }: FetchEventsParams) {
   useEffect((): void => {
     async function fetchEvents(city: string, dateFrom: string, dateTo: string): Promise<void> {
       try {
-        dispatch(eventsActions.isLoadingHandler(true));
+        setIsLoading(true);
         const response: Response = await fetch(`https://backend-portfolio-wasilewski.fly.dev/encore/events?city=${city}&dateFrom=${dateFrom}&dateTo=${dateTo}&artist_id=`);
         if (!response.ok) {
-          throw Error("Something went wrong");
+          throw Error();
         }
         const data: Event[] = await response.json();
-        dispatch(eventsActions.isLoadingHandler(false));
-        dispatch(eventsActions.addEvents(data));
+        setEvents(data);
       } catch (error) {
-        dispatch(eventsActions.isLoadingHandler(false));
-        dispatch(eventsActions.errorHandler(true));
+        setError(true);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 600);
       }
     }
-    fetchEvents(city, dateFrom, dateTo);
-  }, [city, dateFrom, dateTo, dispatch]);
-
-  return [city, dateFrom, dateTo];
+    fetchEvents(filter.city, filter.dateFrom, filter.dateTo);
+  }, [filter, setEvents, setIsLoading, setError]);
 }

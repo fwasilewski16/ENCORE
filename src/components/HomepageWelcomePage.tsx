@@ -16,14 +16,7 @@ export default function WelcomePage(): JSX.Element {
         </div>
         <h2 className="font-inter font-normal md:max-w-[24rem]">{text}</h2>
         <button className="h-11 w-36 rounded-lg bg-black font-inter text-white">
-          <NavLink
-            to="events"
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
-          >
-            Browse events
-          </NavLink>
+          <NavLink to="events">Browse events</NavLink>
         </button>
       </div>
       <div className="justify-end overflow-hidden py-8 align-middle md:flex md:h-full md:w-1/2">

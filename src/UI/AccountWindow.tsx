@@ -1,18 +1,12 @@
-import { useAppDispatch } from "../store/hooks";
-
 interface AccountWindowProps {
   animation: boolean;
   setAccountWindowAnimation: React.Dispatch<React.SetStateAction<boolean>>;
   setAccountWindowVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setLogOutWindowVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setWindowVisible: React.Dispatch<React.SetStateAction<string>>;
   setAnimation: React.Dispatch<React.SetStateAction<boolean>>;
-  setEventsWindowVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setArtistsWindowVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AccountWindow(props: AccountWindowProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
   return (
     <div className={`absolute left-0 right-0 top-16 overflow-hidden rounded-b-lg md:left-auto md:right-auto md:top-[86px] md:rounded-lg`}>
       <div className={`flex w-full flex-col rounded-b-lg border-2 bg-white p-6 transition duration-500 ${!props.animation && "-translate-y-full"} md:rounded-lg`}>
@@ -23,7 +17,7 @@ export default function AccountWindow(props: AccountWindowProps): JSX.Element {
             setTimeout(() => {
               props.setAccountWindowVisible(false);
             }, 500);
-            props.setEventsWindowVisible(true);
+            props.setWindowVisible("eventsWindow");
             setTimeout(() => {
               props.setAnimation(true);
             }, 1);
@@ -38,7 +32,7 @@ export default function AccountWindow(props: AccountWindowProps): JSX.Element {
             setTimeout(() => {
               props.setAccountWindowVisible(false);
             }, 500);
-            props.setArtistsWindowVisible(true);
+            props.setWindowVisible("artistsWindow");
             setTimeout(() => {
               props.setAnimation(true);
             }, 1);
@@ -53,7 +47,7 @@ export default function AccountWindow(props: AccountWindowProps): JSX.Element {
             setTimeout(() => {
               props.setAccountWindowVisible(false);
             }, 500);
-            props.setLogOutWindowVisible(true);
+            props.setWindowVisible("logOutWindow");
             setTimeout(() => {
               props.setAnimation(true);
             }, 1);

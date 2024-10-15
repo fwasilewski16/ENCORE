@@ -32,3 +32,9 @@ export interface Stream {
   image: string;
   name: string;
 }
+
+export interface Filter {
+  city: string;
+  dateFrom: string;
+  dateTo: string;
+}
