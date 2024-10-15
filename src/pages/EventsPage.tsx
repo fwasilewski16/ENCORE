@@ -1,14 +1,10 @@
 import EventFilter from "../components/EventFilter";
 import AllEvents from "../components/AllEvents";
 import { useEffect, useState } from "react";
-import { eventsActions } from "../store";
-import { useAppDispatch } from "../store/hooks";
 import { Event, Filter } from "../types/types";
 import useFetchEvents from "../hooks/useFetchEvents";
 
 export default function EventsPage(): JSX.Element {
-  const dispatch = useAppDispatch();
-
   const [events, setEvents] = useState<Event[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -17,12 +13,9 @@ export default function EventsPage(): JSX.Element {
 
   useFetchEvents({ filter, setEvents, setIsLoading, setError });
 
-  useEffect((): (() => void) => {
+  useEffect((): void => {
     window.scrollTo(0, 0);
     setAnimation(true);
-    return () => {
-      dispatch(eventsActions.addEvents([]));
-    };
   }, []);
 
   return (

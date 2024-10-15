@@ -3,7 +3,14 @@ import { venues } from "../assets/venues";
 import { Event, Artist } from "../types/types";
 import { Venue } from "../assets/venues";
 
-export default function useFetchSingleEvent(event_id: string): [eventSingle: Event | null, isLoading: boolean, error: boolean, otherEvents: Event[]] {
+interface FetchSingleEventResult {
+  eventSingle: Event | null;
+  isLoading: boolean;
+  error: boolean;
+  otherEvents: Event[];
+}
+
+export default function useFetchSingleEvent(event_id: string): FetchSingleEventResult {
   const [eventSingle, setEventSingle] = useState<Event | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -33,14 +40,17 @@ export default function useFetchSingleEvent(event_id: string): [eventSingle: Eve
           setEventSingle({ ...event, venue_url: venue.url, venue_address: venue.address, bio: artist.bio });
         }
         setOtherEvents(otherEvents);
-        setIsLoading(false);
       } catch (error) {
         setError(true);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 600);
       }
     }
 
     fetchEvent(event_id);
   }, [event_id]);
 
-  return [eventSingle, isLoading, error, otherEvents];
+  return { eventSingle, isLoading, error, otherEvents };
 }

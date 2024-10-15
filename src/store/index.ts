@@ -1,44 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Event, Artist } from "../types/types";
 
-interface EventsSliceStateType {
-  events: Event[];
-  isLoading: boolean;
-  error: boolean;
-  filter: {
-    city: string;
-    dateFrom: string;
-    dateTo: string;
-  };
-}
-
-const eventsSliceInitialState: EventsSliceStateType = { events: [], isLoading: false, error: false, filter: { city: "All", dateFrom: "", dateTo: "" } };
-
-const eventsSlice = createSlice({
-  name: "events",
-  initialState: eventsSliceInitialState,
-  reducers: {
-    addEvents(state, action) {
-      state.events = action.payload;
-    },
-    isLoadingHandler(state, action) {
-      state.isLoading = action.payload;
-    },
-    errorHandler(state, action) {
-      state.error = action.payload;
-    },
-    cityHandler(state, action) {
-      state.filter.city = action.payload;
-    },
-    dateFromHandler(state, action) {
-      state.filter.dateFrom = action.payload;
-    },
-    dateToHandler(state, action) {
-      state.filter.dateTo = action.payload;
-    },
-  },
-});
-
 interface LoginSliceType {
   loggedIn: boolean;
 }
@@ -107,20 +69,19 @@ const accountSlice = createSlice({
         events: [...state.events, action.payload],
       };
     },
-    removeEvent(state, action: PayloadAction<Event>) {
+    removeEvent(state, action: PayloadAction<string>) {
       return {
         ...state,
-        events: state.events.filter((event) => event.event_id != action.payload.artist_id),
+        events: state.events.filter((event) => event.event_id != action.payload),
       };
     },
   },
 });
 
 const store = configureStore({
-  reducer: { login: loginSlice.reducer, accountWindow: accountWindowSlice.reducer, account: accountSlice.reducer, events: eventsSlice.reducer },
+  reducer: { login: loginSlice.reducer, accountWindow: accountWindowSlice.reducer, account: accountSlice.reducer },
 });
 
-export const eventsActions = eventsSlice.actions;
 export const loginActions = loginSlice.actions;
 export const accountWindowActions = accountWindowSlice.actions;
 export const accountActions = accountSlice.actions;

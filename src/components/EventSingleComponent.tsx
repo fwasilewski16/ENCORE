@@ -12,7 +12,6 @@ interface EventSingleComponentProps {
   img: string;
   venue: string;
   city: string;
-  function: string;
   exitHandler?: () => void;
 }
 
