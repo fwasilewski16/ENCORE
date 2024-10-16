@@ -1,14 +1,16 @@
 import { NavLink } from "react-router-dom";
 import Modal from "./Modal";
+import { useAppSelector } from "../store/hooks";
 
 interface MobileMenuProps {
   animation: boolean;
   exitHandler: () => void;
-  loggedIn: boolean;
   setWindowVisible: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MobileMenu(props: MobileMenuProps): JSX.Element {
+  const loggedIn: boolean = useAppSelector((state): boolean => state.login.loggedIn);
+
   return (
     <Modal animation={props.animation} exitHandler={props.exitHandler}>
       <div className="mx-auto flex flex-col items-center rounded-lg bg-white px-4">
@@ -28,7 +30,7 @@ export default function MobileMenu(props: MobileMenuProps): JSX.Element {
           <button className="h-12 w-32 rounded-full border-2 border-black bg-white font-bold" onClick={props.exitHandler}>
             BACK
           </button>
-          {!props.loggedIn && (
+          {!loggedIn && (
             <button
               onClick={(): void => {
                 props.setWindowVisible("logInWindow");
@@ -38,7 +40,7 @@ export default function MobileMenu(props: MobileMenuProps): JSX.Element {
               Log In
             </button>
           )}
-          {props.loggedIn && (
+          {loggedIn && (
             <button
               onClick={(): void => {
                 props.setWindowVisible("logOutWindow");

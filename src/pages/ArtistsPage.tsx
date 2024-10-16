@@ -55,7 +55,8 @@ export default function ArtistsPage(): JSX.Element {
               ),
             )}
       </div>
-      {!isLoading && artists.length === 0 && <p className="mt-12 text-center">No results</p>}
+      {!isLoading && artists.length === 0 && !error && <p className="mt-12 text-center">No results</p>}
+      {error && !isLoading && <p className="mt-12 text-center">Failed to fetch artists</p>}
     </div>
   );
 }

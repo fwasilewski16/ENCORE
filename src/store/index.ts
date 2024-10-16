@@ -20,26 +20,6 @@ const loginSlice = createSlice({
   },
 });
 
-interface AccountsWindowSliceType {
-  accountWindowVisible: boolean;
-  animation: boolean;
-}
-
-const accountsWindowSliceInitialState: AccountsWindowSliceType = { accountWindowVisible: false, animation: false };
-
-const accountWindowSlice = createSlice({
-  name: "accountWindow",
-  initialState: accountsWindowSliceInitialState,
-  reducers: {
-    toggleAccountWindow(state) {
-      state.accountWindowVisible = !state.accountWindowVisible;
-    },
-    toggleAnimation(state) {
-      state.animation = !state.animation;
-    },
-  },
-});
-
 interface AccountSliceType {
   artists: Artist[];
   events: Event[];
@@ -79,11 +59,10 @@ const accountSlice = createSlice({
 });
 
 const store = configureStore({
-  reducer: { login: loginSlice.reducer, accountWindow: accountWindowSlice.reducer, account: accountSlice.reducer },
+  reducer: { login: loginSlice.reducer, account: accountSlice.reducer },
 });
 
 export const loginActions = loginSlice.actions;
-export const accountWindowActions = accountWindowSlice.actions;
 export const accountActions = accountSlice.actions;
 
 export default store;

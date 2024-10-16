@@ -14,6 +14,7 @@ import SearchWindow from "../UI/SearchWindow";
 import MyEventsWindow from "../UI/MyEventsWindow";
 import MyArtistsWindow from "../UI/MyArtistsWindow";
 import { useState } from "react";
+import { useAppSelector } from "../store/hooks";
 
 const liClass: string = "flex h-full items-center";
 
@@ -26,7 +27,8 @@ export default function Navbar(): JSX.Element {
 
   const [accountWindowVisible, setAccountWindowVisible] = useState<boolean>(false);
   const [accountWindowAnimation, setAccountWindowAnimation] = useState<boolean>(false);
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  const loggedIn: boolean = useAppSelector((state): boolean => state.login.loggedIn);
 
   function exitHandler(): void {
     setAnimation(false);
@@ -39,9 +41,9 @@ export default function Navbar(): JSX.Element {
 
   return (
     <div className={`fixed top-0 z-50 flex h-16 w-full justify-between bg-white bg-opacity-40 px-4 shadow-md backdrop-blur-sm transition duration-500 ease-in-out md:mt-0 md:h-20 lg:px-12 ${animation ? "-translate-y-full" : ""} ${scrollDirectionDown && !accountWindowVisible ? "-translate-y-24" : ""}`}>
-      {windowVisible === "mobileMenu" && <MobileMenu animation={animation} exitHandler={exitHandler} loggedIn={loggedIn} setWindowVisible={setWindowVisible} />}
-      {windowVisible === "logInWindow" && <LogInWindow animation={animation} exitHandler={exitHandler} setLoggedIn={setLoggedIn} />}
-      {windowVisible === "logOutWindow" && <LogOutWindow animation={animation} exitHandler={exitHandler} setLoggedIn={setLoggedIn} />}
+      {windowVisible === "mobileMenu" && <MobileMenu animation={animation} exitHandler={exitHandler} setWindowVisible={setWindowVisible} />}
+      {windowVisible === "logInWindow" && <LogInWindow animation={animation} exitHandler={exitHandler} />}
+      {windowVisible === "logOutWindow" && <LogOutWindow animation={animation} exitHandler={exitHandler} />}
       {windowVisible === "searchWindow" && <SearchWindow animation={animation} exitHandler={exitHandler} />}
       {windowVisible === "eventsWindow" && <MyEventsWindow animation={animation} exitHandler={exitHandler} />}
       {windowVisible === "artistsWindow" && <MyArtistsWindow animation={animation} exitHandler={exitHandler} />}

@@ -1,13 +1,16 @@
+import { useAppDispatch } from "../store/hooks";
 import Modal from "./Modal";
 import { useState, useEffect } from "react";
+import { loginActions } from "../store";
 
 interface LogInWindowProps {
   animation: boolean;
   exitHandler: () => void;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function LogInWindow(props: LogInWindowProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const [exampleEmail, setExampleEmail] = useState<string>("");
   const [examplePassword, setExamplePassword] = useState<string>("");
 
@@ -62,7 +65,7 @@ export default function LogInWindow(props: LogInWindowProps): JSX.Element {
           <button
             disabled={examplePassword != "password@1234"}
             onClick={(): void => {
-              props.setLoggedIn(true);
+              dispatch(loginActions.logIn());
               props.exitHandler();
             }}
             className="h-12 w-36 items-center rounded-full bg-green-500 px-4 font-bold text-white transition duration-700 disabled:bg-gray-300"
