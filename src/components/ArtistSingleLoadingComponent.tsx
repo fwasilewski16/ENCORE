@@ -1,4 +1,4 @@
-export default function ArtistSingleLoadingComponent(props) {
+export default function ArtistSingleLoadingComponent(): JSX.Element {
   return (
     <div className="group flex h-24 min-h-[7rem] w-full justify-between border-b-2 transition duration-200 xl:w-1/2 xl:rounded-xl xl:border-0 xl:hover:shadow-lg">
       <div className="flex xl:pl-4">

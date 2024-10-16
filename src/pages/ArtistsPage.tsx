@@ -3,25 +3,26 @@ import ArtistSingleComponent from "../components/ArtistSingleComponent";
 
 import { useState, useEffect } from "react";
 import ArtistSingleLoadingComponent from "../components/ArtistSingleLoadingComponent";
+import { Artist } from "../types/types";
 
 const loadingArray = [<ArtistSingleLoadingComponent key={0} />, <ArtistSingleLoadingComponent key={1} />, <ArtistSingleLoadingComponent key={2} />, <ArtistSingleLoadingComponent key={3} />];
 
-export default function ArtistsPage() {
-  const [filterInput, setFilterInput] = useState("");
-  const [filter, setFilter] = useState("");
+export default function ArtistsPage(): JSX.Element {
+  const [filterInput, setFilterInput] = useState<string>("");
+  const [filter, setFilter] = useState<string>("");
 
-  const [artists, isLoading, error] = useFetchArtists(filter);
+  const [artists, isLoading, error]: [artists: Artist[], isLoading: boolean, error: boolean] = useFetchArtists(filter);
 
-  function filterHandler(event) {
+  function filterHandler(event: React.ChangeEvent<HTMLInputElement>): void {
     setFilterInput(event.target.value);
   }
 
-  useEffect(() => {
-    let timer = setTimeout(() => {
+  useEffect((): (() => void) => {
+    let timer = setTimeout((): void => {
       setFilter(filterInput);
     }, 750);
 
-    return () => {
+    return (): void => {
       clearTimeout(timer);
     };
   }, [filterInput]);
@@ -34,7 +35,7 @@ export default function ArtistsPage() {
         {filterInput != "" && (
           <button
             className="px-3 text-sm"
-            onClick={() => {
+            onClick={(): void => {
               setFilterInput("");
               setFilter("");
             }}
@@ -46,11 +47,13 @@ export default function ArtistsPage() {
       <div className="mb-12 flex flex-wrap">
         {isLoading
           ? loadingArray
-          : artists.map((artist) => (
-              <div className="w-full xl:w-1/2" key={artist._id}>
-                <ArtistSingleComponent img={artist.img} name={artist.name} artist_id={artist.artist_id} />
-              </div>
-            ))}
+          : artists.map(
+              (artist): JSX.Element => (
+                <div className="w-full xl:w-1/2" key={artist._id}>
+                  <ArtistSingleComponent img={artist.img} name={artist.name} artist_id={artist.artist_id} function={"artistsPage"} />
+                </div>
+              ),
+            )}
       </div>
       {!isLoading && artists.length === 0 && <p className="mt-12 text-center">No results</p>}
     </div>
