@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import { Stream } from "../types/types";
 
-export default function useFetchStreams(): [Stream[], boolean, boolean] {
+interface FetchStreamsResults {
+  streams: Stream[];
+  isLoading: boolean;
+  error: boolean;
+}
+
+export default function useFetchStreams(): FetchStreamsResults {
   const [streams, setStreams] = useState<Stream[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
-  useEffect(() => {
+  useEffect((): void => {
     async function fetchStreams(): Promise<void> {
       try {
+        setError(false);
         setIsLoading(true);
-        const response = await fetch("https://backend-portfolio-wasilewski.fly.dev/encore/streams");
+        const response: Response = await fetch("https://backend-portfolio-wasilewski.fly.dev/encore/streams");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -18,13 +25,16 @@ export default function useFetchStreams(): [Stream[], boolean, boolean] {
         setStreams(data);
         setIsLoading(false);
       } catch (error) {
-        setIsLoading(false);
         setError(true);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 600);
       }
     }
 
     fetchStreams();
   }, []);
 
-  return [streams, isLoading, error];
+  return { streams, isLoading, error };
 }
