@@ -12,13 +12,12 @@ const months: string[] = ["January", "February", "March", "April", "May", "June"
 
 export default function EventSinglePage(): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const eventsList = useAppSelector((state) => state.account.events);
-  const loggedIn = useAppSelector((state) => state.login.loggedIn);
-
   const { event_id } = useParams<{ event_id: string }>();
 
-  const { eventSingle, isLoading, error, otherEvents }: { eventSingle: Event | null; isLoading: boolean; error: boolean; otherEvents: Event[] } = event_id ? useFetchSingleEvent(event_id) : { eventSingle: null, isLoading: false, error: false, otherEvents: [] };
+  const eventsList: Event[] = useAppSelector((state) => state.account.events);
+  const loggedIn: boolean = useAppSelector((state) => state.login.loggedIn);
+
+  const { eventSingle, isLoading, error, otherEvents }: { eventSingle: Event | null; isLoading: boolean; error: boolean; otherEvents: Event[] } = useFetchSingleEvent(event_id);
 
   const [revealData, setRevealData] = useState<boolean>(false);
 

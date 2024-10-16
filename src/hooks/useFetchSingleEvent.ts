@@ -10,11 +10,15 @@ interface FetchSingleEventResult {
   otherEvents: Event[];
 }
 
-export default function useFetchSingleEvent(event_id: string): FetchSingleEventResult {
+export default function useFetchSingleEvent(event_id: string | undefined): FetchSingleEventResult {
   const [eventSingle, setEventSingle] = useState<Event | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [otherEvents, setOtherEvents] = useState<Event[]>([]);
+
+  if (!event_id) {
+    return { eventSingle: null, isLoading: false, error: false, otherEvents: [] };
+  }
 
   useEffect((): void => {
     async function fetchEvent(event_id: string): Promise<void> {

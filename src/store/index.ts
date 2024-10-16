@@ -37,10 +37,10 @@ const accountSlice = createSlice({
         artists: [...state.artists, action.payload],
       };
     },
-    removeArtist(state, action: PayloadAction<Artist>) {
+    removeArtist(state, action: PayloadAction<string>) {
       return {
         ...state,
-        artists: state.artists.filter((artist) => artist.artist_id != action.payload.artist_id),
+        artists: state.artists.filter((artist) => artist.artist_id != action.payload),
       };
     },
     addEvent(state, action: PayloadAction<Event>) {
