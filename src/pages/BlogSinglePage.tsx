@@ -7,12 +7,12 @@ import EvolutionOfMusicFestivals from "../blog_articles/EvolutionOfMusicFestival
 
 import { blogs } from "../assets/blogs";
 
-export default function BlogSinglePage() {
+export default function BlogSinglePage(): JSX.Element | undefined {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { blog_id } = useParams();
+  const { blog_id } = useParams<{ blog_id: string }>();
 
   switch (blog_id) {
     case "top_10_venues":

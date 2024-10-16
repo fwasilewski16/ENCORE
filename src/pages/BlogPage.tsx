@@ -2,7 +2,14 @@ import { NavLink } from "react-router-dom";
 import { blogs } from "../assets/blogs";
 import { useEffect, useState, useRef } from "react";
 
-function BlogSingle(props) {
+interface BlogSingleProps {
+  to: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+function BlogSingle(props: BlogSingleProps) {
   return (
     <NavLink to={props.to} className="group flex flex-col-reverse border-b-2 pb-8 md:flex-row xl:flex-col-reverse xl:justify-end xl:border-b-0 xl:pb-0">
       <div className="flex min-w-[70%] flex-col pr-2 xl:pr-0 ">
@@ -17,21 +24,21 @@ function BlogSingle(props) {
   );
 }
 
-export default function BlogPage() {
-  const myRef = useRef();
+export default function BlogPage(): JSX.Element {
+  const myRef = useRef<HTMLDivElement>(null);
 
-  const [revealData, setRevealData] = useState(false);
-  const [blogVisible, setBlogVisible] = useState(false);
+  const [revealData, setRevealData] = useState<boolean>(false);
+  const [blogVisible, setBlogVisible] = useState<boolean>(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0].isIntersecting;
+  useEffect((): (() => void) => {
+    const observer: IntersectionObserver = new IntersectionObserver((entries): void => {
+      const entry: boolean = entries[0].isIntersecting;
       entry && setBlogVisible(true);
     });
     window.scrollTo(0, 0);
-    observer.observe(myRef.current);
+    myRef.current && observer.observe(myRef.current);
 
-    return () => {
+    return (): void => {
       observer.disconnect();
     };
   }, []);
@@ -42,7 +49,7 @@ export default function BlogPage() {
         <div>
           <img
             src={blogs[0].image}
-            onLoad={() => {
+            onLoad={(): void => {
               setRevealData(true);
             }}
             className={`h-screen w-full object-cover transition duration-700 ${!revealData && "opacity-0"}`}
