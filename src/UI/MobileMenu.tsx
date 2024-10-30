@@ -13,21 +13,21 @@ export default function MobileMenu(props: MobileMenuProps): JSX.Element {
 
   return (
     <Modal animation={props.animation} exitHandler={props.exitHandler}>
-      <div className="mx-auto flex flex-col items-center rounded-lg bg-white px-4">
-        <NavLink to="events" className="w-full border-b-2 py-6 text-center text-2xl" onClick={props.exitHandler}>
+      <div className="flex flex-col items-center rounded-xl bg-white px-6">
+        <NavLink to="events" className="w-full border-b-2 py-5 text-center text-xl" onClick={props.exitHandler}>
           Browse events
         </NavLink>
-        <NavLink to="artists" className="w-full border-b-2 py-6 text-center text-2xl" onClick={props.exitHandler}>
+        <NavLink to="artists" className="w-full border-b-2 py-5 text-center text-xl" onClick={props.exitHandler}>
           Artists
         </NavLink>
-        <NavLink to="blog" className="w-full border-b-2 py-6 text-center text-2xl" onClick={props.exitHandler}>
+        <NavLink to="blog" className="w-full border-b-2 py-5 text-center text-xl" onClick={props.exitHandler}>
           Blog
         </NavLink>
-        <NavLink to="streams" className="w-full border-b-2 py-6 text-center text-2xl" onClick={props.exitHandler}>
+        <NavLink to="streams" className="w-full border-b-2 py-5 text-center text-xl" onClick={props.exitHandler}>
           Live Streams
         </NavLink>
         <div className="my-6 flex w-full justify-center gap-12 ">
-          <button className="h-12 w-32 rounded-full border-2 border-black bg-white font-bold" onClick={props.exitHandler}>
+          <button className="h-11 w-32 rounded-full border-2 border-black bg-white" onClick={props.exitHandler}>
             BACK
           </button>
           {!loggedIn && (
@@ -35,7 +35,7 @@ export default function MobileMenu(props: MobileMenuProps): JSX.Element {
               onClick={(): void => {
                 props.setWindowVisible("logInWindow");
               }}
-              className="h-12 w-32 items-center rounded-full bg-black px-4 text-white"
+              className="h-11 w-32 items-center rounded-full bg-black px-4 text-white"
             >
               Log In
             </button>
@@ -45,7 +45,7 @@ export default function MobileMenu(props: MobileMenuProps): JSX.Element {
               onClick={(): void => {
                 props.setWindowVisible("logOutWindow");
               }}
-              className="h-12 w-32 items-center rounded-full bg-black px-4 text-white"
+              className="h-11 w-32 items-center rounded-full bg-black px-4 text-white"
             >
               Log Out
             </button>

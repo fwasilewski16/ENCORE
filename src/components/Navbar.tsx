@@ -15,8 +15,7 @@ import MyEventsWindow from "../UI/MyEventsWindow";
 import MyArtistsWindow from "../UI/MyArtistsWindow";
 import { useState } from "react";
 import { useAppSelector } from "../store/hooks";
-
-const liClass: string = "flex h-full items-center";
+import LogInOutButton from "../UI/LogInOutButton";
 
 export default function Navbar(): JSX.Element {
   const scrollDirectionDown: boolean = useScroll();
@@ -40,7 +39,7 @@ export default function Navbar(): JSX.Element {
   useScreenWidth(windowVisible, exitHandler);
 
   return (
-    <div className={`fixed top-0 z-50 flex h-16 w-full justify-between bg-white bg-opacity-40 px-4 shadow-md backdrop-blur-sm transition duration-500 ease-in-out md:mt-0 md:h-20 lg:px-12 ${animation ? "-translate-y-full" : ""} ${scrollDirectionDown && !accountWindowVisible ? "-translate-y-24" : ""}`}>
+    <div className={`fixed top-0 z-50 flex h-16 w-full justify-between bg-white bg-opacity-50 px-4 shadow-md backdrop-blur-sm transition duration-500 md:h-20 lg:px-12 ${animation ? "-translate-y-full" : ""} ${scrollDirectionDown && !accountWindowVisible ? "-translate-y-24" : ""}`}>
       {windowVisible === "mobileMenu" && <MobileMenu animation={animation} exitHandler={exitHandler} setWindowVisible={setWindowVisible} />}
       {windowVisible === "logInWindow" && <LogInWindow animation={animation} exitHandler={exitHandler} />}
       {windowVisible === "logOutWindow" && <LogOutWindow animation={animation} exitHandler={exitHandler} />}
@@ -57,61 +56,47 @@ export default function Navbar(): JSX.Element {
         <NavbarNavlink action={"Artists"} to={"artists"} />
         <NavbarNavlink action={"Blog"} to={"blog"} />
         <NavbarNavlink action={"Live Streams"} to={"streams"} />
-        {!loggedIn && (
-          <li className={liClass}>
-            <button
-              className="hidden h-9 items-center rounded-full bg-black px-4 font-inter text-white md:m-4 md:flex xl:m-8"
+        {loggedIn ? <LogInOutButton action={"Log Out"} setWindowVisible={setWindowVisible} setAnimation={setAnimation} /> : <LogInOutButton action={"Log In"} setWindowVisible={setWindowVisible} setAnimation={setAnimation} />}
+        {loggedIn && (
+          <li className="mr-4 flex h-full flex-col items-center xl:mr-8">
+            <button className="my-auto md:relative">
+              <img
+                src={user_icon}
+                onClick={(): void => {
+                  if (!accountWindowVisible) {
+                    setAccountWindowVisible(true);
+                    setTimeout(() => {
+                      setAccountWindowAnimation(true);
+                    }, 1);
+                  } else {
+                    setAccountWindowAnimation(false);
+                    setTimeout(() => {
+                      setAccountWindowVisible(false);
+                    }, 500);
+                  }
+                }}
+                className="max-h-9 rounded-full"
+              />
+            </button>
+            {accountWindowVisible && <AccountWindow animation={accountWindowAnimation} setAccountWindowAnimation={setAccountWindowAnimation} setAccountWindowVisible={setAccountWindowVisible} setWindowVisible={setWindowVisible} setAnimation={setAnimation} />}
+          </li>
+        )}
+        <li className="flex h-full items-center">
+          <button>
+            <img
+              src={search_icon}
+              className="max-h-9 rounded-full"
               onClick={(): void => {
-                setWindowVisible("logInWindow");
-                setTimeout(() => {
+                setWindowVisible("searchWindow");
+                accountWindowVisible && setAccountWindowVisible(false);
+                setTimeout((): void => {
                   setAnimation(true);
                 }, 1);
               }}
-            >
-              Log In
-            </button>
-          </li>
-        )}
-        <li className={liClass}>
-          {loggedIn && (
-            <div className="mr-4 flex h-full flex-col items-center xl:mr-8">
-              <button className="my-auto md:relative">
-                <img
-                  src={user_icon}
-                  onClick={(): void => {
-                    if (!accountWindowVisible) {
-                      setAccountWindowVisible(true);
-                      setTimeout(() => {
-                        setAccountWindowAnimation(true);
-                      }, 1);
-                    } else {
-                      setAccountWindowAnimation(false);
-                      setTimeout(() => {
-                        setAccountWindowVisible(false);
-                      }, 500);
-                    }
-                  }}
-                  className="max-h-9 rounded-full"
-                />
-              </button>
-              {accountWindowVisible && <AccountWindow animation={accountWindowAnimation} setAccountWindowAnimation={setAccountWindowAnimation} setAccountWindowVisible={setAccountWindowVisible} setWindowVisible={setWindowVisible} setAnimation={setAnimation} />}
-            </div>
-          )}
-          <div className="flex h-full items-center">
-            <button>
-              <img
-                src={search_icon}
-                className="max-h-9 rounded-full"
-                onClick={(): void => {
-                  setWindowVisible("searchWindow");
-                  accountWindowVisible && setAccountWindowVisible(false);
-                  setTimeout((): void => {
-                    setAnimation(true);
-                  }, 1);
-                }}
-              />
-            </button>
-          </div>
+            />
+          </button>
+        </li>
+        <li>
           <div className="ml-4 flex h-full items-center md:hidden">
             <button>
               <img
